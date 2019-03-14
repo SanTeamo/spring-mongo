@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        
+    
+    <context:component-scan base-package="com.santeamo"/>
+
+	<!-- handle the json -->
+	<!--<bean
+			class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean
+						class="org.springframework.http.converter.StringHttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<value>text/plain;charset=UTF-8</value>
+						</list>
+					</property>
+				</bean>
+				<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<value>application/json;charset=UTF-8</value>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>-->
+
+	<!-- 配置注解驱动，相当于同时配置处理器映射器和处理器适配器，对json响应提供支持 -->
+	<mvc:annotation-driven conversion-service="conversionServiceFactoryBean">
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+		<mvc:argument-resolvers>
+			<bean class="org.springframework.data.web.PageableHandlerMethodArgumentResolver" />
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
+	
+	<!-- 配置conversion-service转换日期 -->
+	<bean id="conversionServiceFactoryBean" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<!-- 自定期转换器的类 -->
+				<bean class="com.santeamo.conveter.DateConveter"/>
+			</list>
+		</property>
+	</bean>
+
+	<!-- match the jsp view -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" />
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:mapping path="/Home/Cart/*"/>
+			<!-- 配置不拦截目录 -->
+			<mvc:exclude-mapping path="/Product/**"/>
+			<mvc:exclude-mapping path="/Category/**"/>
+			<mvc:exclude-mapping path="/index"/>
+			<mvc:exclude-mapping path="/Home"/>
+			<mvc:exclude-mapping path="/Home/toLogin"/>
+			<mvc:exclude-mapping path="/Home/toRegist"/>
+			<mvc:exclude-mapping path="/Home/login"/>
+			<mvc:exclude-mapping path="/Home/regist"/>
+			<mvc:exclude-mapping path="/Home/checkUsername"/>
+			<bean class="com.santeamo.interceptor.LoginInterception"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+</beans>
