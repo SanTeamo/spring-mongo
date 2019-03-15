@@ -9,13 +9,8 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class CategoryServiceImpl implements CategoryService {
+public class CategoryServiceImpl extends BaseServiceImpl implements CategoryService {
 
     @Resource
     private CategoryDao dao;
-
-    @Override
-    public List<Category> findAll() {
-        return dao.findAll(Category.class);
-    }
 }

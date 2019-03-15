@@ -20,7 +20,7 @@ public class Cart implements Serializable {
 
     private String userId;
 
-    private List<CartItem> cartItems = new ArrayList<>();
+    private List<ProductWrapper> productWrappers = new ArrayList<>();
 
     public String getId() {
         return id;
@@ -38,12 +38,12 @@ public class Cart implements Serializable {
         this.userId = userId;
     }
 
-    public List<CartItem> getCartItems() {
-        return cartItems;
+    public List<ProductWrapper> getProductWrappers() {
+        return productWrappers;
     }
 
-    public void setCartItems(List<CartItem> cartItems) {
-        this.cartItems = cartItems;
+    public void setProductWrappers(List<ProductWrapper> productWrappers) {
+        this.productWrappers = productWrappers;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class Cart implements Serializable {
         return "Cart{" +
                 "id='" + id + '\'' +
                 ", userId='" + userId + '\'' +
-                ", cartItems=" + cartItems +
+                ", productWrappers=" + productWrappers +
                 '}';
     }
 }

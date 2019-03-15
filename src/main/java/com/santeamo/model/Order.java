@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 /**
  *  订单实体类
@@ -14,12 +15,14 @@ public class Order implements Serializable {
     @Id
     private String id;
     private String userId;
-    private List<CartItem> cartItems;
-    private int status;//订单状态：0未付款；1已付款；2已发货；3已确认收货；4已评价
+    private String sellerId;
+    private List<ProductWrapper> productWrappers;
+    private int status;//订单状态：0未确认；1未付款；2已付款未发货；3已发货未签收；4已确认收货；5已评价
     private Double totalPrice;
     private String recipient = "未填写";
     private String phone = "未填写";
     private String address = "未填写";
+    private Date orderTime;
 
     public String getId() {
         return id;
@@ -29,12 +32,28 @@ public class Order implements Serializable {
         this.id = id;
     }
 
-    public List<CartItem> getCartItems() {
-        return cartItems;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setCartItems(List<CartItem> cartItems) {
-        this.cartItems = cartItems;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(String sellerId) {
+        this.sellerId = sellerId;
+    }
+
+    public List<ProductWrapper> getProductWrappers() {
+        return productWrappers;
+    }
+
+    public void setProductWrappers(List<ProductWrapper> productWrappers) {
+        this.productWrappers = productWrappers;
     }
 
     public int getStatus() {
@@ -51,14 +70,6 @@ public class Order implements Serializable {
 
     public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getRecipient() {
@@ -85,17 +96,27 @@ public class Order implements Serializable {
         this.address = address;
     }
 
+    public Date getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(Date orderTime) {
+        this.orderTime = orderTime;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
                 "id='" + id + '\'' +
                 ", userId='" + userId + '\'' +
-                ", cartItems=" + cartItems +
+                ", sellerId='" + sellerId + '\'' +
+                ", productWrappers=" + productWrappers +
                 ", status=" + status +
                 ", totalPrice=" + totalPrice +
                 ", recipient='" + recipient + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
+                ", orderTime=" + orderTime +
                 '}';
     }
 }

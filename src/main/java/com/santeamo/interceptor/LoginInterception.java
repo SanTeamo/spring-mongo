@@ -13,9 +13,11 @@ public class LoginInterception implements HandlerInterceptor {
         //System.out.println(object);
         if (object==null) {
             System.out.println("未登录！");
-            //request.getRequestDispatcher(request.getContextPath().toString()+"/Home/toLogin");
+
             response.setContentType("text/html;charset=utf-8");
             response.getWriter().write("<script type='text/javascript'>alert('请先登录!');window.location.href='/Home/toLogin'</script>");
+
+            //request.getRequestDispatcher("/Home/toLogin").forward(request, response);
             return false;
         } else {
             return true;

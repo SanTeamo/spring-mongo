@@ -11,18 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("Category")
+@RequestMapping("/Category")
 public class CategoryController {
 
     @Resource
     private CategoryService categoryService;
 
-    @RequestMapping(value = "findAllCats",produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/findAllCats",produces = "application/json; charset=utf-8")
     @ResponseBody
     public List<Category> findAllCats(){
 
-        List<Category> list = new ArrayList<>();
-        list = categoryService.findAll();
+        List<Category> list = categoryService.findAll(Category.class);
         /*for (int i =0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }*/

@@ -1,12 +1,34 @@
 $(function(){
-    //页面加载完毕之后获取到class的值为delete元素,为其绑定点击事件
+
     $(".delete").click(function(){
 
         var pid=$(this).parent().parent().find(".pid").val();
 
         if(confirm("确认删除?")){
-            $.post("/Home/Cart/removeCartItemById",
-                { pid : pid },
+            $.ajax({
+                url:"/Home/Cart/removeCartItemById",
+                data:{pid:pid},
+                type:"post",
+                dataType:"json",
+                async:false,
+                success:function (result) {
+                    if (result) {
+                        alert("删除成功！");
+                        window.location.href = "/Home/Cart";
+                    }else {
+                        alert("删除失败，请稍后再试！");
+                    }
+                }
+            });
+        }
+    });
+
+    //清空购物车
+    $("#clear").click(function(){
+
+        if(confirm("确认清空购物车?")){
+            $.post("/Home/Cart/clearCart",
+                { },
                 function(data){
                     var result = data;
                     if (result) {
@@ -111,6 +133,7 @@ $(function(){
         });
     });
 
+    //提交选中的商品生成订单
     $("#submitOrder").click(function () {
         // 创建Form
         var form = $('<form></form>');
@@ -121,8 +144,6 @@ $(function(){
         // _self -> 当前页面 _blank -> 新页面
         form.attr('target', '_self');
 
-
-
         var i = 0;
 
         $(".check").each(function(){
@@ -130,9 +151,9 @@ $(function(){
                 var tr = $(this).parent().parent();
                 var num = tr.find(".num").val();
                 var pid = tr.find(".pid").val();
-                var num_input = $('<input type="text" name="cartItems['+i+'].num" />');
+                var num_input = $('<input type="hidden" name="productWrappers['+i+'].num" />');
                 num_input.attr('value', num);
-                var pid_input = $('<input type="text" name="cartItems['+i+'].pid" />');
+                var pid_input = $('<input type="hidden" name="productWrappers['+i+'].pid" />');
                 pid_input.attr('value', pid);
                 //console.log("num = "+num+", pid = "+pid);
                 // 附加到Form
@@ -142,7 +163,7 @@ $(function(){
             }
         });
 
-        var totalPrice = $('<input type="text" name="totalPrice" />');
+        var totalPrice = $('<input type="hidden" name="totalPrice" />');
         totalPrice.attr('value', $(".totalPrice").text());
         //console.log("num = "+num+", pid = "+pid);
         // 附加到Form
@@ -151,7 +172,7 @@ $(function(){
         //不添加到body中会显示Form submission canceled because the form is not connected
         $(document.body).append(form);
 
-        console.log(form)
+        //console.log(form)
         // 提交表单
         form.submit();
         // 注意return false取消链接的默认动作

@@ -24,13 +24,13 @@ public class Product implements Serializable {
     private String pdescImage;//产品描述图片
     private Integer catId;//产品分类ID
     private Integer sales;//产品销量
-    private String owner;//产品所有者
+    private String ownerUserName;//产品所有者
     private String evalId;//产品评论ID
 
     public Product() {
     }
 
-    public Product(String id, String pname, String pimage, Double price, String pdesc, String pdescImage, Integer catId, Integer sales, String owner, String evalId) {
+    public Product(String id, String pname, String pimage, Double price, String pdesc, String pdescImage, Integer catId, Integer sales, String ownerUserName, String evalId) {
         this.id = id;
         this.pname = pname;
         this.pimage = pimage;
@@ -39,7 +39,7 @@ public class Product implements Serializable {
         this.pdescImage = pdescImage;
         this.catId = catId;
         this.sales = sales;
-        this.owner = owner;
+        this.ownerUserName = ownerUserName;
         this.evalId = evalId;
     }
 
@@ -107,12 +107,12 @@ public class Product implements Serializable {
         this.sales = sales;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getOwnerUserName() {
+        return ownerUserName;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setOwnerUserName(String ownerUserName) {
+        this.ownerUserName = ownerUserName;
     }
 
     public String getEvalId() {

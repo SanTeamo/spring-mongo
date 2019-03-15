@@ -41,37 +41,26 @@ public class ProductController {
 
     @RequestMapping("addProductTest")
     public String addProductTest(){
-
-        Product product = new Product();
-        product.setPname("西瓜");
-        product.setPrice(3.99D);
-        product.setPdesc("很甜");
-        product.setCatId(1);
-        product.setEvalId("5c7dd18aca104dd40c159847");
-        product.setPimage("testPimage.jpg");
-        product.setPdescImage("testDescImage.JPG");
-        product.setOwner("admin");
-        product.setSales(2000);
-
-        productService.save(product);
+        for (int i = 0; i < 10; i++) {
+            Product product = new Product();
+            product.setPname("西瓜"+i);
+            product.setPrice(3.99D);
+            product.setPdesc("很甜");
+            product.setCatId(1);
+            product.setEvalId("5c7dd18aca104dd40c159847");
+            product.setPimage("testPimage.jpg");
+            product.setPdescImage("testDescImage.JPG");
+            product.setOwnerUserName("bbbb");
+            product.setSales(2000);
+            productService.insert(product);
+        }
 
         return "redirect:/index";
     }
 
-    /*@RequestMapping("/catId/{catId}")
-    public String getProductByCatId(@PathVariable Integer catId, Model model){
-
-        List<Product> list = productService.getProductsByCatId(catId);
-
-        model.addAttribute("list",list);
-        model.addAttribute("catId",catId);
-
-        return "product_list";
-    }*/
-
     @RequestMapping("/catId/{catId}")
     //@ResponseBody
-    public String getProductByCatId(@PathVariable Integer catId, Model model,@PageableDefault(value = 12) Pageable pageable){
+    public String getProductsByCatId(@PathVariable Integer catId, Model model,@PageableDefault(value = 12) Pageable pageable){
 
         Pageable pageRequest = new PageRequest(pageable.getPageNumber()==0?0:pageable.getPageNumber()-1,12);
 

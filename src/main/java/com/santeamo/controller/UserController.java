@@ -29,11 +29,11 @@ public class UserController {
     @RequestMapping("/login")
     public String login(String username, String password, HttpSession session) {
 
-        System.out.println("username:"+username+" , password:"+password);
+        //System.out.println("username:"+username+" , password:"+password);
 
         User user = userService.findUserByUnameandPwd(username,password);
 
-        System.out.println(user);
+        //System.out.println(user);
 
         session.setAttribute("loginUser",user);
 
@@ -45,7 +45,7 @@ public class UserController {
 
         user.setType(1);
         System.out.println(user.toString());
-        userService.insertUser(user);
+        userService.insert(user);
         return "login";
 
     }

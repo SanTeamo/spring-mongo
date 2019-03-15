@@ -18,9 +18,6 @@
 	type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"
 	type="text/javascript"></script>
-<!-- 引入自定义css文件 style.css -->
-<link rel="stylesheet"
-      href="${pageContext.request.contextPath}/css/style.css" type="text/css" />
 
 <style>
 body {

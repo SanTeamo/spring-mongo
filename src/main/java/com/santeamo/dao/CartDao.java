@@ -2,7 +2,7 @@ package com.santeamo.dao;
 
 import com.mongodb.WriteResult;
 import com.santeamo.model.Cart;
-import com.santeamo.model.CartItem;
+import com.santeamo.model.ProductWrapper;
 
 public interface CartDao extends BaseDao {
 
@@ -12,7 +12,7 @@ public interface CartDao extends BaseDao {
 
     WriteResult changeCartItemNum(String pid, Integer num, String cartId);
 
-    WriteResult addToCart(CartItem cartItem, String userId);
+    WriteResult addToCart(ProductWrapper productWrapper, String userId);
 
     WriteResult clearCart(String userId);
 }

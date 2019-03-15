@@ -15,9 +15,6 @@
 	<script src="<%=basePath%>js/jquery-1.11.3.min.js" type="text/javascript"></script>
 	<script src="<%=basePath%>js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="<%=basePath%>js/register.js" type="text/javascript"></script>
-	<!-- 引入自定义css文件 style.css -->
-	<link rel="stylesheet"
-          href="<%=basePath%>css/style.css" type="text/css" />
 	<style>
 		body {
 			margin-top: 20px;

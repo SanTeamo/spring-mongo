@@ -8,8 +8,6 @@ import com.santeamo.service.CartService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class CartServiceImpl extends BaseServiceImpl implements CartService {
@@ -21,7 +19,7 @@ public class CartServiceImpl extends BaseServiceImpl implements CartService {
     private ProductDao productDao;
 
     @Override
-    public CartWrapper findByUserId(String userId) {
+    public Cart findByUserId(String userId) {
 
         Cart cart = cartDao.findByUserId(userId);
 
@@ -30,42 +28,8 @@ public class CartServiceImpl extends BaseServiceImpl implements CartService {
             cart.setUserId(userId);
             cartDao.insert(cart);
             return null;
-        }else {
-            List<CartItem> cartItems = cart.getCartItems();
-
-            List<CartItemWrapper> cartItemWrappers = new ArrayList<>();
-
-            for (int i = 0; i < cartItems.size(); i++) {
-
-                CartItem cartItem = cartItems.get(i);
-
-                Product product = productDao.getProductByPid(cartItem.getPid());
-                Integer num = cartItem.getNum();
-
-                CartItemWrapper cartItemWrapper = new CartItemWrapper(product,num);
-
-                cartItemWrappers.add(cartItemWrapper);
-
-            }
-
-            CartWrapper cartWrapper = new CartWrapper(cart.getId(),cart.getUserId(),cartItemWrappers);
-
-            return cartWrapper;
         }
-    }
-
-    @Override
-    public void insertTest() {
-        Cart cart = new Cart();
-        cart.setUserId("5c7de970ca1029208745e904");
-
-        CartItem cartItem1 = new CartItem("5c7dd4b2ca1040a612208ca4",8);
-        CartItem cartItem2 = new CartItem("5c7dd542ca1040a612208ca5",8);
-
-        cart.getCartItems().add(cartItem1);
-        cart.getCartItems().add(cartItem2);
-
-        cartDao.insert(cart);
+        return cart;
     }
 
     @Override
@@ -89,7 +53,7 @@ public class CartServiceImpl extends BaseServiceImpl implements CartService {
     }
 
     @Override
-    public Boolean addToCart(CartItem cartItem, String userId) {
+    public Boolean addToCart(ProductWrapper productWrapper, String userId) {
 
         Cart cart = cartDao.findByUserId(userId);
 
@@ -98,7 +62,11 @@ public class CartServiceImpl extends BaseServiceImpl implements CartService {
             cart.setUserId(userId);
             cartDao.insert(cart);
         }
-        WriteResult writeResult = cartDao.addToCart(cartItem,userId);
+
+        Product product = productDao.getProductByPid(productWrapper.getPid());
+        productWrapper.setProduct(product);
+
+        WriteResult writeResult = cartDao.addToCart(productWrapper,userId);
         if (writeResult.getN()>0){
             return true;
         }else {

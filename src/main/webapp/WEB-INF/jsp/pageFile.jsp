@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:if test="${not empty page.totalPages}">
+<c:if test="${page.totalPages>0}">
 	<div class="col-md-12">
 			<%--<div class="col-md-4 col-md-offset-5">--%>
 		<div class="text-center">

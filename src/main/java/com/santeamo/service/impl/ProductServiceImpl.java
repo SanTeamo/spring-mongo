@@ -13,18 +13,13 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class ProductServiceImpl implements ProductService {
+public class ProductServiceImpl extends BaseServiceImpl implements ProductService {
 
     @Resource
     private ProductDao productDao;
 
     @Resource
     private EvaluationDao evaluationDao;
-
-    @Override
-    public void save(Product product) {
-        productDao.saveOrUpdate(product);
-    }
 
     @Override
     public List<Product> getProducts() {
