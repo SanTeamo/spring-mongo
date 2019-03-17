@@ -104,7 +104,7 @@ $(function(){
         });
 
         $(".totalNum").text(total);
-        $(".totalPrice").text(totalPrice);
+        $(".totalPrice").text(totalPrice.toFixed(2));
 //}
 //});
     }
@@ -151,14 +151,18 @@ $(function(){
                 var tr = $(this).parent().parent();
                 var num = tr.find(".num").val();
                 var pid = tr.find(".pid").val();
+                var sellerUserName = tr.find(".sellerUserName").val();
                 var num_input = $('<input type="hidden" name="productWrappers['+i+'].num" />');
                 num_input.attr('value', num);
                 var pid_input = $('<input type="hidden" name="productWrappers['+i+'].pid" />');
                 pid_input.attr('value', pid);
+                var sellerUserName_input = $('<input type="hidden" name="productWrappers['+i+'].sellerUserName" />');
+                sellerUserName_input.attr('value', sellerUserName);
                 //console.log("num = "+num+", pid = "+pid);
                 // 附加到Form
                 form.append(num_input);
                 form.append(pid_input);
+                form.append(sellerUserName_input);
                 i++;
             }
         });
@@ -174,8 +178,19 @@ $(function(){
 
         //console.log(form)
         // 提交表单
-        form.submit();
+        //form.submit();
         // 注意return false取消链接的默认动作
+        $.post(form.attr('action'),
+            form.serialize(),
+            function(res) {
+                var obj =  res;
+                if(obj){
+                    alert("成功生成订单！");
+                    window.location.href="/Home/Order";
+                }else {
+                    alert("创建失败，请稍后再试！")
+                }
+            }, "json");
         return false;
     });
 });

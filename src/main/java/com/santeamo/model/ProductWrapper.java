@@ -13,7 +13,8 @@ public class ProductWrapper implements Serializable {
     private Double price;//产品价格
     private Integer catId;//产品分类ID
     private Integer num;//数量
-    private String sellerUserName;
+    private String sellerUserName;//卖家username
+    private Boolean commented = false;//是否已经评价
 
     public ProductWrapper() {
     }
@@ -74,6 +75,22 @@ public class ProductWrapper implements Serializable {
 
     public void setNum(Integer num) {
         this.num = num;
+    }
+
+    public String getSellerUserName() {
+        return sellerUserName;
+    }
+
+    public void setSellerUserName(String sellerUserName) {
+        this.sellerUserName = sellerUserName;
+    }
+
+    public Boolean getCommented() {
+        return commented;
+    }
+
+    public void setCommented(Boolean commented) {
+        this.commented = commented;
     }
 
     public void setProduct(Product product){

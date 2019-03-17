@@ -1,62 +1,66 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>会员登录</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/bootstrap.min.css"
-	type="text/css" />
-<script src="${pageContext.request.contextPath}/js/jquery-1.11.3.min.js"
-	type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"
-	type="text/javascript"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css" />
+<script src="${pageContext.request.contextPath}/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js" type="text/javascript"></script>
+	<style>
+		/*body {
+			padding-top: 40px;
+			padding-bottom: 40px;
+			background-color: #eee;
+		}*/
 
-<style>
-body {
-	margin-top: 20px;
-	margin: 0 auto;
-}
+		.form-signin {
+			max-width: 330px;
+			padding: 15px;
+			margin: 0 auto;
+		}
+		/*.form-signin .form-signin-heading,
+		.form-signin .checkbox {
+			margin-bottom: 10px;
+		}
+		.form-signin .checkbox {
+			font-weight: normal;
+		}*/
+		.form-signin .form-control {
+			position: relative;
+			height: auto;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			padding: 10px;
+			font-size: 16px;
+		}
+		.form-signin .form-control:focus {
+			z-index: 2;
+		}
+		.form-signin input[type="text"] {
+			margin-bottom: -1px;
+			border-bottom-right-radius: 0;
+			border-bottom-left-radius: 0;
+		}
+		.form-signin input[type="password"] {
+			margin-bottom: 10px;
+			border-top-left-radius: 0;
+			border-top-right-radius: 0;
+		}
 
-.carousel-inner .item img {
-	width: 100%;
-	height: 300px;
-}
-
-.container .row div {
-	/* position:relative;
-	 float:left; */
-	
-}
-
-font {
-	color: #666;
-	font-size: 22px;
-	font-weight: normal;
-	padding-right: 17px;
-}
-</style>
+	</style>
 </head>
 <body>
 
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
-	<div class="container"
-		style="width:100%;height:460px;background:#FF2C4C url('${pageContext.request.contextPath}/img/loginbg.jpg') no-repeat;">
-		<div class="row">
-			<div class="col-md-7">
-				<!--<img src="image/login.jpg" width="500" height="330" alt="会员登录" title="会员登录">-->
-			</div>
-			<div class="col-md-5">
-				<div
-					style="width: 95%; border: 1px solid #E7E7E7; padding: 10px; border-radius: 5px; margin-top: 60px; background: #fff;">
-					<font>会员登录</font>USER LOGIN
+
+	<div class="container">
+			<%--<div class="col-md-5">
+				<div style="width: 95%; border: 1px solid #E7E7E7; padding: 10px; border-radius: 5px; margin-top: 60px; background: #fff;">
+					<font>会员登录</font>
 					<div>${msg}</div>
 					<form class="form-horizontal"
 						action="${pageContext.request.contextPath}/Home/login"
@@ -70,13 +74,13 @@ font {
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+							<label for="inputPassword" class="col-sm-2 control-label">密码</label>
 							<div class="col-sm-6">
 								<input type="password" name="password" class="form-control"
-									id="inputPassword3" placeholder="请输入密码">
+									id="inputPassword" placeholder="请输入密码">
 							</div>
 						</div>
-						<%-- <div class="form-group">
+						&lt;%&ndash; <div class="form-group">
 							<label for="inputPassword3" class="col-sm-2 control-label">验证码</label>
 							<div class="col-sm-3">
 								<input type="text" class="form-control" id="inputPassword3"
@@ -96,7 +100,7 @@ font {
 									</label>
 								</div>
 							</div>
-						</div> --%>
+						</div> &ndash;%&gt;
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
 								<input type="submit" width="100" value="登录" name="submit"
@@ -107,8 +111,15 @@ font {
 						</div>
 					</form>
 				</div>
-			</div>
-		</div>
+			</div>--%>
+			<form class="form-signin" action="${pageContext.request.contextPath}/Home/login" method="post">
+				<h2 class="form-signin-heading">登录</h2><div>${msg}</div>
+				<label for="inputUserName" class="sr-only">用户名</label>
+				<input type="text" name="username" id="inputUserName" class="form-control" placeholder="请输入用户名" required="" autofocus="">
+				<label for="inputPassword" class="sr-only">Password</label>
+				<input type="password" name="password" id="inputPassword" class="form-control" placeholder="请输入密码" required="">
+				<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+			</form>
 	</div>
 
 	<%@ include file="/WEB-INF/jsp/footer.jsp" %>

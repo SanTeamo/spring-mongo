@@ -75,6 +75,7 @@
 			<mvc:mapping path="/**"/>
 			<mvc:mapping path="/Home/Cart/*"/>
 			<mvc:mapping path="/Home/Order/*"/>
+			<mvc:mapping path="/Evaluation/Comment/*"/>
 			<!-- 配置不拦截目录 -->
 			<mvc:exclude-mapping path="/Product/**"/>
 			<mvc:exclude-mapping path="/Category/**"/>

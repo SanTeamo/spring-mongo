@@ -1,19 +1,26 @@
 package com.santeamo.service;
 
 import com.santeamo.model.Order;
+import com.santeamo.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface OrderService extends BaseService {
-    Page<Order> findOrdersByUserId(String userId, Pageable pageable);
+    Page<Order> findOrders(User user, Pageable pageable);
 
-    void createOrder(Order order);
+    Page<Order> findnotDoneOrders(User user, Pageable pageable);
 
-    Order findOrderByOrderId(String orderId);
+    Page<Order> findDoneOrders(User user, Pageable pageable);
 
-    void confirmOrder(Order order);
+    Order findOrderByOIdAndUser(String oid, User user);
 
-    Page<Order> findnotDoneOrders(String userId, Pageable pageable);
+    Boolean createOrder(Order order);
 
-    Page<Order> findDoneOrders(String userId, Pageable pageable);
+    Boolean confirmOrder(Order order);
+
+    Boolean payOrder(String orderId);
+
+    Boolean signOrder(String orderId);
+
+    Boolean sendOut(String orderId);
 }

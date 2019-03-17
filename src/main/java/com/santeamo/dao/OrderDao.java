@@ -1,15 +1,23 @@
 package com.santeamo.dao;
 
+import com.mongodb.WriteResult;
+import com.santeamo.myenum.OrderStatus;
 import com.santeamo.model.Order;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.core.query.Query;
+
+import java.util.List;
 
 public interface OrderDao extends BaseDao {
-    Page<Order> findOrdersByUserId(String userId, Pageable pageable);
 
-    void confirmOrder(Order order);
+    Page<Order> findOrdersByQuery(Query query, Pageable pageable);
 
-    Page<Order> findnotDoneOrders(String userId, Pageable pageable);
+    WriteResult confirmOrder(Order order);
 
-    Page<Order> findDoneOrders(String userId, Pageable pageable);
+    void createOrder(List<Order> orders);
+
+    WriteResult changeStatus(String orderId, OrderStatus status);
+
+    Order findOrderByQuery(Query query);
 }

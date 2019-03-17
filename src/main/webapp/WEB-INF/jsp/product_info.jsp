@@ -65,6 +65,11 @@
 <%@ include file="/WEB-INF/jsp/header.jsp" %>
 
 <div class="container">
+	<%--<div class="alert alert-warning alert-dismissible fade in" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+		<strong>Holy guacamole!</strong> Best check yo self, you're not looking too good.
+	</div>
+	--%>
 
 	<div class="container" style="width:100%;margin:0 auto;">
 		<div class="col-md-12 visible-md visible-lg " style="border: 1px solid #e4e4e4;width:100%;padding:10px;margin-bottom:10px;">
@@ -167,7 +172,7 @@
 							</div>
 							<div class="col-xs-9">
 								<div class="col-xs-12">
-									评分：${comment.score}
+									评分：${comment.descScore},${comment.serviceScore},${comment.logisticsScore}
 								</div>
 								<div class="col-xs-12">
 									评价：${comment.description}

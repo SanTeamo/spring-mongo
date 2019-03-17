@@ -15,7 +15,7 @@ public class Order implements Serializable {
     @Id
     private String id;
     private String userId;
-    private String sellerId;
+    private String sellerUserName;
     private List<ProductWrapper> productWrappers;
     private int status;//订单状态：0未确认；1未付款；2已付款未发货；3已发货未签收；4已确认收货；5已评价
     private Double totalPrice;
@@ -40,12 +40,12 @@ public class Order implements Serializable {
         this.userId = userId;
     }
 
-    public String getSellerId() {
-        return sellerId;
+    public String getSellerUserName() {
+        return sellerUserName;
     }
 
-    public void setSellerId(String sellerId) {
-        this.sellerId = sellerId;
+    public void setSellerUserName(String sellerUserName) {
+        this.sellerUserName = sellerUserName;
     }
 
     public List<ProductWrapper> getProductWrappers() {
@@ -109,7 +109,7 @@ public class Order implements Serializable {
         return "Order{" +
                 "id='" + id + '\'' +
                 ", userId='" + userId + '\'' +
-                ", sellerId='" + sellerId + '\'' +
+                ", sellerUserName='" + sellerUserName + '\'' +
                 ", productWrappers=" + productWrappers +
                 ", status=" + status +
                 ", totalPrice=" + totalPrice +

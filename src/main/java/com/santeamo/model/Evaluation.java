@@ -18,7 +18,17 @@ public class Evaluation implements Serializable {
     @Id
     private String id;
 
+    private String pid;
+
     private List<Comment> comments = new ArrayList<>();
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
 
     public String getId() {
         return id;
@@ -40,6 +50,7 @@ public class Evaluation implements Serializable {
     public String toString() {
         return "Evaluation{" +
                 "id='" + id + '\'' +
+                ", pid='" + pid + '\'' +
                 ", comments=" + comments +
                 '}';
     }

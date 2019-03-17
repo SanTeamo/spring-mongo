@@ -25,7 +25,7 @@ public class CartController {
         Cart cart = cartService.findByUserId(userId);
         session.setAttribute("cart",cart);
 
-        return "cart";
+        return "user/cart";
     }
 
     @RequestMapping("/addToCart")

@@ -1,20 +1,15 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
 <!doctype html>
 <html>
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>会员注册</title>
-	<link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css" type="text/css" />
-	<script src="<%=basePath%>js/jquery-1.11.3.min.js" type="text/javascript"></script>
-	<script src="<%=basePath%>js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="<%=basePath%>js/register.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css" />
+	<script src="${pageContext.request.contextPath}/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/js/register.js" type="text/javascript"></script>
 	<style>
 		body {
 			margin-top: 20px;
@@ -129,7 +124,7 @@
 						<div class="col-sm-offset-2 col-sm-10">
 							<input type="submit" width="100" value="注册" name="submit"
 								border="0"
-								style="background: url('<%=basePath%>img/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+								style="background: url('${pageContext.request.contextPath}/img/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0);
 				    height:35px;width:100px;color:white;">
 						</div>
 					</div>

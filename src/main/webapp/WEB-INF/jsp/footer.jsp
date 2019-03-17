@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!--
-            	描述：页脚部分
-            -->
+<!--页脚部分 -->
 <div class="col-md-12">
 	<div class="container">
 		<div class="hidden-sm hidden-xs" style="border-top: 1px solid darkgray;margin-top: 50px;">

@@ -6,12 +6,11 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>填写订单</title>
+	<title>订单详情</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css" />
 	<script src="${pageContext.request.contextPath}/js/jquery-1.11.3.min.js" type="text/javascript"></script>
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js" type="text/javascript"></script>
 	<style>
-
 		.carousel-inner .item img {
 			width: 100%;
 			height: 300px;
@@ -25,24 +24,50 @@
 
 
 <div class="container">
+	<c:if test="${order.status<=1}">
+		<div class="progress">
+			<div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: ${(order.status+1)*50}%;">
+					<%--<span class="sr-only">60% Complete</span>--%>
+				<c:if test="${order.status==0}">
+					填写收货信息
+				</c:if>
+				<c:if test="${order.status==1}">
+					付款
+				</c:if>
+			</div>
+		</div>
+	</c:if>
 
-	<form id="orderForm" method="post" action="${pageContext.request.contextPath}/Home/Order/confirmOrder">
-		<div class="row">
 
-			<div style="margin:0 auto;margin-top:10px;width:100%;">
-				<strong>订单详情</strong>
-				<table class="table table-bordered">
-					<tbody>
+	<form id="orderForm" method="post" >
+		<div class="page-header">
+			<h1>订单详情 <%--<small>全部订单</small>--%></h1>
+		</div>
+		<h3>商品信息</h3>
+		<div class="panel panel-default">
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
 					<tr class="warning">
-						<th colspan="5">订单编号:${order.id}</th>
+						<c:if test="${order.status==4}">
+							<th colspan="6">订单编号:${order.id}</th>
+						</c:if>
+						<c:if test="${order.status!=4}">
+							<th colspan="5">订单编号:${order.id}</th>
+						</c:if>
 					</tr>
-					<tr class="warning">
+					<tr>
 						<th>图片</th>
 						<th>商品</th>
 						<th>价格</th>
 						<th>数量</th>
 						<th>小计</th>
+						<c:if test="${order.status==4}">
+							<th>评价</th>
+						</c:if>
 					</tr>
+					</thead>
+					<tbody>
 					<c:forEach items="${order.productWrappers}" var="item">
 						<tr class="active">
 							<td width="60" width="40%">
@@ -58,24 +83,40 @@
 									${item.num}
 							</td>
 							<td width="15%">
-								<span class="subtotal">￥<fmt:formatNumber type="number" value="${item.num*item.price}" pattern="0.00" maxFractionDigits="2"/></span>
+								<span class="subtotal">
+									￥<fmt:formatNumber type="number" value="${item.num*item.price}" pattern="0.00" maxFractionDigits="2"/>
+								</span>
 							</td>
+							<c:if test="${order.status==4}">
+								<td class="text-center">
+									<input type="hidden" value="${item.pid}">
+									<c:if test="${item.commented == false}">
+										<button type="button" class="btn btn-info comment">评价</button>
+									</c:if>
+									<c:if test="${item.commented == true}">
+										<button type="button" class="btn btn-info" disabled="disabled">已评价</button>
+									</c:if>
+								</td>
+							</c:if>
 						</tr>
 					</c:forEach>
 					</tbody>
 				</table>
 			</div>
 
-			<div style="text-align:center;">
-				商品总价: <strong style="color:#ff6600;">￥${order.totalPrice }元</strong>
-			</div>
+		</div>
 
+		<div style="text-align:center;">
+
+			商品总价: <strong style="color:#ff6600;">
+			￥<fmt:formatNumber type="number" value="${order.totalPrice }" pattern="0.00" maxFractionDigits="2"/>元
+		</strong>
 		</div>
 
 		<div>
 			<hr/>
 
-			<%--未付款--%>
+			<%--填写收货信息--%>
 			<c:if test="${order.status==0}">
 				<div class="form-group row">
 					<label for="address" class="col-sm-1 control-label">地址</label>
@@ -97,8 +138,14 @@
 							<%--<input type="hidden" name="totalPrice" value="${order.totalPrice }"/>--%>
 					</div>
 				</div>
+
+				<div class="text-center">
+					<button type="button" class="btn btn-success confirm">确认信息</button>
+				</div>
+
 			</c:if>
-			<c:if test="${order.status==1}">
+			<c:if test="${order.status>0}">
+				<h3>收货信息</h3>
 				<div class="panel panel-default">
 					<div class="panel-heading">收货人</div>
 					<div class="panel-body">
@@ -117,13 +164,33 @@
 							${order.phone}
 					</div>
 				</div>
+				<c:if test="${order.status==1}">
+					<div class="text-center">
+						<button type="button" class="btn btn-danger pay">去付款</button>
+					</div>
+				</c:if>
+				<c:if test="${order.status==2}">
+					<div class="text-center">
+						<h3>等待发货</h3>
+					</div>
+				</c:if>
+				<c:if test="${order.status==3}">
+					<div class="text-center">
+						<h3>包裹在路上了！</h3>
+						<button type="button" class="btn btn-success receive">签收</button>
+					</div>
+				</c:if>
+				<c:if test="${order.status==5}">
+					<div class="text-center">
+						<h3>订单已完成</h3>
+					</div>
+				</c:if>
+
+
 			</c:if>
 
 
 			<hr/>
-
-			<c:if test="${order.status==0}">
-			<div style="margin-top:5px;">
 				<%-- <strong>选择银行：</strong>
                 <p>
                     <br/>
@@ -150,15 +217,6 @@
 
                 </p>
                 <hr/> --%>
-				<p style="text-align:right">
-					<a href="javascript:document.getElementById('orderForm').submit();">
-						<img src="${pageContext.request.contextPath}/img/finalbutton.gif" width="204" height="51" border="0" />
-					</a>
-				</p>
-				<hr/>
-
-			</div>
-			</c:if>
 		</div>
 	</form>
 </div>
@@ -166,5 +224,49 @@
 <%@ include file="/WEB-INF/jsp/footer.jsp" %>
 
 </body>
+<script type="text/javascript">
+	var form = $("#orderForm");
+	$(".confirm").click(function () {
+        $.post("/Home/Order/confirmOrder",
+            form.serialize(),
+            function(res) {
+                var obj =  res;
+                if(obj){
+                    alert("信息填写成功！");
+                    window.location.href="/Home/Order/id/${order.id}";
+                }
+            }, "json");
+        return false;
+    });
+
+    $(".pay").click(function () {
+        $.post("/Home/Order/payOrder",
+            {orderId:"${order.id}"},
+            function(res) {
+                var obj =  res;
+                if(obj){
+                    alert("支付成功！");
+                    window.location.href="/Home/Order/id/${order.id}";
+                }
+            }, "json");
+        return false;
+    })
+    $(".receive").click(function () {
+        $.post("/Home/Order/signOrder",
+            {orderId:"${order.id}"},
+            function(res) {
+                var obj =  res;
+                if(obj){
+                    alert("签收成功！");
+                    window.location.href="/Home/Order/id/${order.id}";
+                }
+            }, "json");
+        return false;
+    })
+    $(".comment").click(function () {
+        var pid = $(this).prev().val();
+        window.location.href="/Evaluation/Comment/"+pid;
+    })
+</script>
 
 </html>
