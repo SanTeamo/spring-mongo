@@ -79,6 +79,7 @@
 			<!-- 配置不拦截目录 -->
 			<mvc:exclude-mapping path="/Product/**"/>
 			<mvc:exclude-mapping path="/Category/**"/>
+			<mvc:exclude-mapping path="/Image/**"/>
 			<mvc:exclude-mapping path="/index"/>
 			<mvc:exclude-mapping path="/Home"/>
 			<mvc:exclude-mapping path="/Home/toLogin"/>

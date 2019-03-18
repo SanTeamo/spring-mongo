@@ -168,9 +168,9 @@
                     //allScore += $(this).siblings(":first").html() + ':' + text + '\n';
                 })
                 //alert(allScore);
-                var text = $("#description").val();
+                var description = $("#description").val();
                 //console.log(text);
-                if (text == ""){
+                if (description == ""){
                     error++;
                     //alert('请填写评论!');
                     //return false;

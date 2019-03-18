@@ -5,5 +5,5 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<c:set var="ctx" value="<%=request.getContextPath() %>" />
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 
