@@ -80,7 +80,7 @@
 		<div class="col-md-12">
 
 			<div class="col-md-4">
-				<img class="img-rounded img-responsive" src="${pageContext.request.contextPath}/products/${product.catId}/${product.pimage}">
+				<img class="img-rounded img-responsive" src="${pageContext.request.contextPath}/products/${product.pimage}">
 			</div>
 
 			<div class="col-md-6">
@@ -159,7 +159,7 @@
 
 				<h2 id="section2" style="border-bottom: 1px solid palevioletred">商品详情</h2>
 				<div style="border: 1px solid darkgrey" >
-					<img class="col-xs-12" src="${pageContext.request.contextPath}/products/${product.catId}/${product.pdescImage}">
+					<img class="col-xs-12" src="${pageContext.request.contextPath}/products/${product.pdescImage}">
 				</div>
 
 				<h2 id="section3" style="border-bottom: 1px solid palevioletred">商品评价</h2>

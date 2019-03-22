@@ -64,7 +64,7 @@
 										<input type="checkbox" class="check">
 									</td>
 									<td width="10%">
-										<img style="display: inline-block;" src="${pageContext.request.contextPath}/products/${item.catId}/${item.pimage}" height="60">
+										<img style="display: inline-block;" src="${pageContext.request.contextPath}/products/${item.pimage}" height="60">
 									</td>
 									<td width="20%">
 										<a target="_blank">${item.pname}</a>

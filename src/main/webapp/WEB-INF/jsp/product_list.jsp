@@ -34,7 +34,7 @@
 	          <c:forEach items="${page.content}" var="p">
 				<div  class="col-md-2 col-sm-4 col-xs-6" style="text-align: center;height: 240px;">
 					<a href="${pageContext.request.contextPath}/Product/catId/${p.catId}/id/${p.id}">
-						<img src="${pageContext.request.contextPath}/products/${p.catId}/${p.pimage}" width="170" height="170" style="display: inline-block;" class="img-rounded img-responsive">
+						<img src="${pageContext.request.contextPath}/products/${p.pimage}" width="170" height="170" style="display: inline-block;" class="img-rounded img-responsive">
 					</a>
 					<p><a href="${pageContext.request.contextPath}/Product/catId/${p.catId}/id/${p.id}" style='color:green'>${fn:substring(p.pname, 0, 10) }...</a></p>
 					<p><font color="#FF0000">商城价：&yen;${p.price}</font></p>

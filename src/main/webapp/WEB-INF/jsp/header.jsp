@@ -89,7 +89,7 @@
 
 										</li>
 										<li>
-											<a href="${pageContext.request.contextPath}/#">我的店铺</a>
+											<a href="${pageContext.request.contextPath}/Home/Shop">我的店铺</a>
 										</li>
 									</c:if>
 								</c:if>
@@ -120,7 +120,7 @@
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-				<ul class="nav navbar-nav" id="myUL">
+				<ul class="nav navbar-nav" id="category">
 
 				</ul>
 
@@ -133,11 +133,13 @@
 <script>
 $(function(){
 	var url="/Category/findAllCats";
-	//var obj=none;
+    var selectCatId = $("#catId");
 	$.post(url,function(data){
 		$.each(data,function(i,obj){
 			var li="<li><a href='/Product/catId/"+obj.catId+"'>"+obj.catName+"</a></li>";
-			$("#myUL").append(li);
+			$("#category").append(li);
+			var option = "<option value='"+obj.catId+"'>"+obj.catName+"</option>";
+			selectCatId.append(option);
 		});
 		
 	},"json");

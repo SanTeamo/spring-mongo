@@ -44,7 +44,7 @@ public class ImageController {
     }
 
     @RequestMapping(value = "/{imageUrl}")
-    public void picShowTest(@PathVariable String imageUrl, HttpServletRequest request, HttpServletResponse response){
+    public void findPic(@PathVariable String imageUrl, HttpServletRequest request, HttpServletResponse response){
         try {
             GridFSDBFile file = imageService.findPic(imageUrl+".jpg","pimage");
             OutputStream out = response.getOutputStream();

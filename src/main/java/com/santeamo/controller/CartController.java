@@ -21,11 +21,15 @@ public class CartController {
     @RequestMapping(value = {"","/"})
     public String myCart(HttpSession session){
 
-        String userId = ((User) session.getAttribute("loginUser")).getId();
-        Cart cart = cartService.findByUserId(userId);
-        session.setAttribute("cart",cart);
+        User user = (User) session.getAttribute("loginUser");
+        if(user.getType()==1){
+            Cart cart = cartService.findByUserId(user.getId());
+            session.setAttribute("cart",cart);
+            return "user/cart";
+        }else {
+            return "redirect:/index";
+        }
 
-        return "user/cart";
     }
 
     @RequestMapping("/addToCart")

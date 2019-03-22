@@ -122,4 +122,20 @@ public class Product implements Serializable {
     public void setEvalId(String evalId) {
         this.evalId = evalId;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id='" + id + '\'' +
+                ", pname='" + pname + '\'' +
+                ", pimage='" + pimage + '\'' +
+                ", price=" + price +
+                ", pdesc='" + pdesc + '\'' +
+                ", pdescImage='" + pdescImage + '\'' +
+                ", catId=" + catId +
+                ", sales=" + sales +
+                ", ownerUserName='" + ownerUserName + '\'' +
+                ", evalId='" + evalId + '\'' +
+                '}';
+    }
 }

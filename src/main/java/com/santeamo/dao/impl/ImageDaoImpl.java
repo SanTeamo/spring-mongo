@@ -48,7 +48,7 @@ public class ImageDaoImpl extends MongoDBBaseDao implements ImageDao {
     }
 
     /***
-     * mongodb查询图片
+     * 查询图片
      * @param imageUrl
      * @param gridName 节点名，相当于表名
      */

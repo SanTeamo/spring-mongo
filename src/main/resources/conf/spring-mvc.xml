@@ -54,6 +54,9 @@
 			<bean class="org.springframework.data.web.PageableHandlerMethodArgumentResolver" />
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
+
+    <!-- 处理对静态资源的请求 -->
+    <!--<mvc:resources location="/products" mapping="/static/**" />-->
 	
 	<!-- 配置conversion-service转换日期 -->
 	<bean id="conversionServiceFactoryBean" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
@@ -70,6 +73,16 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
 		p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" />
 
+
+    <!-- 上传文件 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8"/>
+        <!-- 最大内存大小 -->
+        <property name="maxInMemorySize" value="10240"/>
+        <!-- 最大文件大小，-1为不限制大小 -->
+        <property name="maxUploadSize" value="-1"/>
+    </bean>
+
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
@@ -78,6 +91,7 @@
 			<mvc:mapping path="/Evaluation/Comment/*"/>
 			<!-- 配置不拦截目录 -->
 			<mvc:exclude-mapping path="/Product/**"/>
+            <mvc:exclude-mapping path="/Home/Shop/**"/>
 			<mvc:exclude-mapping path="/Category/**"/>
 			<mvc:exclude-mapping path="/Image/**"/>
 			<mvc:exclude-mapping path="/index"/>

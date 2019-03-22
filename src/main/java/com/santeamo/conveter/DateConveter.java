@@ -19,6 +19,7 @@ public class DateConveter implements Converter<String, Date> {
             }
         } catch (Exception e) {
             // TODO: handle exception
+            e.printStackTrace();
         }
 
         return null;

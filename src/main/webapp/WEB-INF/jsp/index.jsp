@@ -20,7 +20,7 @@
 
 	<body>
 		<div class="container-fluid">
-			<img src="${ctx}/Image/5c8f20d0ca10b71e7dfafa24">
+			<%--<img src="${ctx}/Image/mypictest">--%>
 
 			<%@ include file="/WEB-INF/jsp/header.jsp" %>
 

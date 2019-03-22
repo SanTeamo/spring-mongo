@@ -9,6 +9,8 @@ import com.santeamo.model.Product;
 import com.santeamo.service.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -34,7 +36,8 @@ public class ProductServiceImpl extends BaseServiceImpl implements ProductServic
 
     @Override
     public Page<Product> getProductsByCatId(Integer catId, Pageable pageable) {
-        return productDao.getProductsByCatId(catId, pageable);
+        Query query = new Query(Criteria.where("catId").is(catId));
+        return productDao.getProductsByQuery(query,pageable);
     }
 
     @Override

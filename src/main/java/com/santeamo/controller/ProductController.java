@@ -2,6 +2,7 @@ package com.santeamo.controller;
 
 import com.santeamo.model.Evaluation;
 import com.santeamo.model.Product;
+import com.santeamo.model.User;
 import com.santeamo.service.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,10 +13,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/Product")
@@ -35,25 +42,6 @@ public class ProductController {
         modelAndView.setViewName("product_list");
 
         return modelAndView;
-    }
-
-    @RequestMapping("addProductTest")
-    public String addProductTest(){
-        for (int i = 0; i < 10; i++) {
-            Product product = new Product();
-            product.setPname("西瓜"+i);
-            product.setPrice(3.99D);
-            product.setPdesc("很甜");
-            product.setCatId(1);
-            product.setEvalId("5c7dd18aca104dd40c159847");
-            product.setPimage("testPimage.jpg");
-            product.setPdescImage("testDescImage.JPG");
-            product.setOwnerUserName("bbbb");
-            product.setSales(2000);
-            productService.insert(product);
-        }
-
-        return "redirect:/index";
     }
 
     @RequestMapping("/catId/{catId}")
@@ -81,6 +69,48 @@ public class ProductController {
         model.addAttribute("comments",evaluation.getComments());
 
         return "product_info";
+    }
+
+    @RequestMapping("/addProduct")
+    public String addProduct(Product product, MultipartFile pimagefile, MultipartFile pdescImagefile, HttpSession session){
+
+        User user = (User) session.getAttribute("loginUser");
+        product.setOwnerUserName(user.getUsername());
+        String pathRoot = session.getServletContext().getRealPath("");
+        String path="";
+        if(!pimagefile.isEmpty()){
+            //图片新名字
+            String newName = UUID.randomUUID().toString().replaceAll("-","");
+            //图片原有名字
+            String oldName = pimagefile.getOriginalFilename();
+            //图片后缀
+            String suffix = oldName.substring(oldName.lastIndexOf("."));
+            path="/products/"+newName+suffix;
+            try {
+                pimagefile.transferTo(new File(pathRoot+path));
+                product.setPimage(newName+suffix);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(!pdescImagefile.isEmpty()){
+            //图片新名字
+            String newName = UUID.randomUUID().toString().replaceAll("-","");
+            //图片原有名字
+            String oldName = pdescImagefile.getOriginalFilename();
+            //图片后缀
+            String suffix = oldName.substring(oldName.lastIndexOf("."));
+            path="/products/"+newName+suffix;
+            try {
+                pdescImagefile.transferTo(new File(pathRoot+path));
+                product.setPdescImage(newName+suffix);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println(product);
+
+        return "redirect:/Home/Shop";
     }
 
 }

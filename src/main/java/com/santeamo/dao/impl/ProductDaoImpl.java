@@ -20,8 +20,7 @@ public class ProductDaoImpl extends MongoDBBaseDao implements ProductDao {
     }
 
     @Override
-    public Page<Product> getProductsByCatId(Integer catId, Pageable pageable) {
-        Query query = new Query(Criteria.where("catId").is(catId));
+    public Page<Product> getProductsByQuery(Query query, Pageable pageable) {
         long total = mongoTemplate.count(query,Product.class);
         List<Product> list = mongoTemplate.find(query.with(pageable),Product.class);
         Page<Product> page = new PageImpl<>(list,pageable,total);
