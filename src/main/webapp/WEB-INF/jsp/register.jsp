@@ -6,10 +6,7 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>会员注册</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css" />
-	<script src="${pageContext.request.contextPath}/js/jquery-1.11.3.min.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/js/register.js" type="text/javascript"></script>
+	<script src="${ctx}/js/register.js" type="text/javascript"></script>
 	<style>
 		body {
 			margin-top: 20px;

@@ -15,7 +15,7 @@ public interface ProductService extends BaseService {
 
     Product getProductByPid(String id);
 
-    Evaluation getEvaluationByEvalId(String evalId);
+    Evaluation getEvaluationByPid(String pid);
 
     Page<Product> getProductsByCatId(Integer catId, Pageable pageable);
 }

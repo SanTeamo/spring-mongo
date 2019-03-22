@@ -35,15 +35,16 @@ public class UserController {
 
         //System.out.println(user);
 
-        session.setAttribute("loginUser",user);
+        if (user.getType()==1){
+            session.setAttribute("loginUser",user);
 
+        }
         return "redirect:/index";
     }
 
     @RequestMapping("/regist")
     public String register(User user){
 
-        user.setType(1);
         System.out.println(user.toString());
         userService.insert(user);
         return "login";

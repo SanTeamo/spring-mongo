@@ -20,4 +20,9 @@ public class ShopServiceImpl extends BaseServiceImpl implements ShopService {
         Query query = new Query(Criteria.where("ownerUserName").is(username));
         return productDao.getProductsByQuery(query,pageable);
     }
+
+    @Override
+    public Product getProductByPid(String pid) {
+        return productDao.getProductByPid(pid);
+    }
 }

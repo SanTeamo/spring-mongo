@@ -91,7 +91,7 @@
 			<mvc:mapping path="/Evaluation/Comment/*"/>
 			<!-- 配置不拦截目录 -->
 			<mvc:exclude-mapping path="/Product/**"/>
-            <mvc:exclude-mapping path="/Home/Shop/**"/>
+            <mvc:exclude-mapping path="/Shop/**"/>
 			<mvc:exclude-mapping path="/Category/**"/>
 			<mvc:exclude-mapping path="/Image/**"/>
 			<mvc:exclude-mapping path="/index"/>
@@ -101,7 +101,16 @@
 			<mvc:exclude-mapping path="/Home/login"/>
 			<mvc:exclude-mapping path="/Home/regist"/>
 			<mvc:exclude-mapping path="/Home/checkUsername"/>
+			<mvc:exclude-mapping path="/Admin/**"/>
 			<bean class="com.santeamo.interceptor.LoginInterception"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/Admin/**"/>
+			<!-- 配置不拦截目录 -->
+			<mvc:exclude-mapping path="/Admin"/>
+			<mvc:exclude-mapping path="/Admin/toLogin"/>
+			<mvc:exclude-mapping path="/Admin/login"/>
+			<bean class="com.santeamo.interceptor.AdminInterception"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
 

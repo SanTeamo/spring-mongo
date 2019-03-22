@@ -1,6 +1,7 @@
 package com.santeamo.service.impl;
 
 import com.mongodb.WriteResult;
+import com.santeamo.dao.CartDao;
 import com.santeamo.model.User;
 import com.santeamo.myenum.OrderStatus;
 import com.santeamo.dao.OrderDao;
@@ -27,6 +28,9 @@ public class OrderServiceImpl extends BaseServiceImpl implements OrderService {
 
     @Resource
     private ProductDao productDao;
+
+    @Resource
+    private CartDao cartDao;
 
     @Override
     public Page<Order> findOrders(User user, Pageable pageable) {
@@ -88,7 +92,7 @@ public class OrderServiceImpl extends BaseServiceImpl implements OrderService {
 
 
     @Override
-    public Boolean createOrder(Order order) {
+    public Boolean createOrder(Order order,String cartId) {
         List<ProductWrapper> productWrappers = order.getProductWrappers();
         Map<String,List<ProductWrapper>> map = new HashMap<>();
         for (ProductWrapper productWrapper : productWrappers){
@@ -124,6 +128,11 @@ public class OrderServiceImpl extends BaseServiceImpl implements OrderService {
         }
         //System.out.println(orders);
         orderDao.createOrder(orders);
+
+        for (ProductWrapper productWrapper : productWrappers){
+            cartDao.removeCartItemById(productWrapper.getPid(),cartId);
+        }
+
         return true;
 
     }

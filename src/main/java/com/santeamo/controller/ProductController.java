@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
@@ -63,7 +62,7 @@ public class ProductController {
 
         Product product = productService.getProductByPid(id);
 
-        Evaluation evaluation = productService.getEvaluationByEvalId(product.getEvalId());
+        Evaluation evaluation = productService.getEvaluationByPid(product.getId());
 
         model.addAttribute("product",product);
         model.addAttribute("comments",evaluation.getComments());
@@ -109,8 +108,61 @@ public class ProductController {
             }
         }
         System.out.println(product);
+        productService.saveOrUpdate(product);
 
         return "redirect:/Home/Shop";
+    }
+
+    @RequestMapping("/updateProduct")
+    public String updateProduct(Product product, MultipartFile pimagefile, MultipartFile pdescImagefile, HttpSession session){
+        String pathRoot = session.getServletContext().getRealPath("");
+        String path="";
+        Product preProduct = productService.getProductByPid(product.getId());
+        product.setPimage(preProduct.getPimage());
+        product.setPimage(preProduct.getPdescImage());
+        if(!pimagefile.isEmpty()){
+            //图片新名字
+            String newName = UUID.randomUUID().toString().replaceAll("-","");
+            //图片原有名字
+            String oldName = pimagefile.getOriginalFilename();
+            //图片后缀
+            String suffix = oldName.substring(oldName.lastIndexOf("."));
+            path="/products/"+newName+suffix;
+            try {
+                pimagefile.transferTo(new File(pathRoot+path));
+                product.setPimage(newName+suffix);
+                File file = new File(pathRoot+"/products/"+preProduct.getPimage());
+                if (file.exists()){
+                    file.delete();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(!pdescImagefile.isEmpty()){
+            //图片新名字
+            String newName = UUID.randomUUID().toString().replaceAll("-","");
+            //图片原有名字
+            String oldName = pdescImagefile.getOriginalFilename();
+            //图片后缀
+            String suffix = oldName.substring(oldName.lastIndexOf("."));
+            path="/products/"+newName+suffix;
+            try {
+                pdescImagefile.transferTo(new File(pathRoot+path));
+                product.setPdescImage(newName+suffix);
+                File file = new File(pathRoot+"/products/"+preProduct.getPdescImage());
+                if (file.exists()){
+                    System.out.println(file.getAbsolutePath());
+                    file.delete();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println(product);
+        productService.saveOrUpdate(product);
+
+        return "redirect:/Shop";
     }
 
 }

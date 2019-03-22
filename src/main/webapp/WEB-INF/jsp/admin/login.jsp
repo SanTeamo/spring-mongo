@@ -50,11 +50,9 @@
 </head>
 <body>
 
-	<%@ include file="/WEB-INF/jsp/header.jsp"%>
-
 	<div class="container">
-			<form class="form-signin" action="${pageContext.request.contextPath}/Home/login" method="post">
-				<h2 class="form-signin-heading">登录</h2><div>${msg}</div>
+			<form class="form-signin" action="${ctx}/Admin/login" method="post">
+				<h2 class="form-signin-heading">后台登录</h2><div>${msg}</div>
 				<label for="inputUserName" class="sr-only">用户名</label>
 				<input type="text" name="username" id="inputUserName" class="form-control" placeholder="请输入用户名" required="" autofocus="">
 				<label for="inputPassword" class="sr-only">Password</label>
@@ -62,7 +60,5 @@
 				<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
 			</form>
 	</div>
-
-	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

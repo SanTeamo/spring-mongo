@@ -1,7 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!--	描述：菜单栏	-->
 <div class="container-fluid">
 	<%--<nav class="navbar navbar-default navbar-static-top">
@@ -9,7 +6,7 @@
 		...
 	</div>
 </nav>--%>
-	<div class="col-md-2 col-xs-12 col-md-offset-2" >
+	<div class="col-md-3 col-xs-12 col-md-offset-1" >
 		<img src="${pageContext.request.contextPath}/img/logo.png" height="100" />
 	</div>
 	<div class="col-md-6 col-xs-12" style="margin-top: 20px">
@@ -83,7 +80,7 @@
 									</c:if>
 
 									<%--是卖家--%>
-									<c:if test="${loginUser.type==2}">
+									<%--<c:if test="${loginUser.type==2}">
 										<li>
 											<a href="${pageContext.request.contextPath}/Home/Order">我的订单</a>
 
@@ -91,7 +88,7 @@
 										<li>
 											<a href="${pageContext.request.contextPath}/Home/Shop">我的店铺</a>
 										</li>
-									</c:if>
+									</c:if>--%>
 								</c:if>
 							</ul>
 						</li>

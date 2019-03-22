@@ -14,7 +14,7 @@ public interface OrderService extends BaseService {
 
     Order findOrderByOIdAndUser(String oid, User user);
 
-    Boolean createOrder(Order order);
+    Boolean createOrder(Order order,String cartId);
 
     Boolean confirmOrder(Order order);
 

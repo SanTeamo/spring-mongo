@@ -1,8 +1,6 @@
 package com.santeamo.service.impl;
 
-import com.mongodb.gridfs.GridFSDBFile;
 import com.santeamo.dao.EvaluationDao;
-import com.santeamo.dao.ImageDao;
 import com.santeamo.dao.ProductDao;
 import com.santeamo.model.Evaluation;
 import com.santeamo.model.Product;
@@ -14,7 +12,6 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.io.File;
 import java.util.List;
 
 @Service
@@ -25,9 +22,6 @@ public class ProductServiceImpl extends BaseServiceImpl implements ProductServic
 
     @Resource
     private EvaluationDao evaluationDao;
-
-    @Resource
-    private ImageDao imageDao;
 
     @Override
     public List<Product> getProducts() {
@@ -46,9 +40,16 @@ public class ProductServiceImpl extends BaseServiceImpl implements ProductServic
     }
 
     @Override
-    public Evaluation getEvaluationByEvalId(String evalId) {
-        return evaluationDao.findById(Evaluation.class,evalId);
-    }
+    public Evaluation getEvaluationByPid(String pid) {
 
+        Evaluation evaluation = evaluationDao.findById(Evaluation.class,pid);
+
+        if (evaluation==null){
+            evaluation = new Evaluation();
+            evaluation.setPid(pid);
+            evaluationDao.insert(evaluation);
+        }
+        return evaluation;
+    }
 
 }

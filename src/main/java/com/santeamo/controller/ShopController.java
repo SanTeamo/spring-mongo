@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/Home/Shop")
+@RequestMapping("/Shop")
 public class ShopController {
     @Resource
     private ShopService shopService;
@@ -32,9 +32,9 @@ public class ShopController {
 
             model.addAttribute("page",page);
 
-            return "shop";
+            return "admin/shop";
         }else {
-            return "redirect:/index";
+            return "shop";
         }
     }
 
@@ -49,12 +49,23 @@ public class ShopController {
 
             model.addAttribute("page",page);
 
-            return "shop";
+            return "admin/shop";
         }else {
 
-            model.addAttribute("msg","店铺不存在！");
+            //model.addAttribute("msg","店铺不存在！");
 
-            return "error";
+            //return "error";
+            return "shop";
         }
+    }
+
+    @RequestMapping("/edit/{id}")
+    public String product(@PathVariable String id,HttpSession session){
+
+        Product product = shopService.getProductByPid(id);
+
+        session.setAttribute("product",product);
+
+        return "admin/product_info";
     }
 }

@@ -1,5 +1,6 @@
 package com.santeamo.controller;
 
+import com.santeamo.model.Cart;
 import com.santeamo.model.Order;
 import com.santeamo.model.User;
 import com.santeamo.myenum.OrderStatus;
@@ -36,7 +37,7 @@ public class OrderController {
             return "user/order_list";
         }
         if (user.getType()==2){
-            return "seller/order_list";
+            return "admin/order_list";
         }
         return "redirect:/index";
     }
@@ -51,7 +52,7 @@ public class OrderController {
             return "user/order_list";
         }
         if (user.getType()==2){
-            return "seller/order_list";
+            return "admin/order_list";
         }
         return "redirect:/index";
     }
@@ -66,7 +67,7 @@ public class OrderController {
             return "user/order_list";
         }
         if (user.getType()==2){
-            return "seller/order_list";
+            return "admin/order_list";
         }
         return "redirect:/index";
     }
@@ -81,7 +82,7 @@ public class OrderController {
             return "user/order_info";
         }
         if (user.getType()==2){
-            return "seller/order_info";
+            return "admin/order_info";
         }
         return "redirect:/index";
     }
@@ -90,12 +91,13 @@ public class OrderController {
     @ResponseBody
     public Boolean createOrder(Order order, HttpSession session){
         User user = (User) session.getAttribute("loginUser");
+        Cart cart = (Cart) session.getAttribute("cart");
         order.setUserId(user.getId());
         order.setStatus(OrderStatus.NOTCONFIRM.getStatus());
         order.setOrderTime(new Date());
         //System.out.println(order);
 
-        return orderService.createOrder(order);
+        return orderService.createOrder(order,cart.getId());
 
         //return "redirect:/Home/Order";
     }
