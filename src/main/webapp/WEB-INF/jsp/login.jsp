@@ -60,6 +60,7 @@
 				<label for="inputPassword" class="sr-only">Password</label>
 				<input type="password" name="password" id="inputPassword" class="form-control" placeholder="请输入密码" required="">
 				<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+				<a class="btn btn-lg btn-primary btn-block" href="/Home/toRegist">注册</a>
 			</form>
 	</div>
 

@@ -86,10 +86,10 @@
 			<div class="col-md-11" >
 				<c:forEach items="${page.content}" var="p">
 					<div  class="col-md-2 col-sm-4 col-xs-6" style="text-align: center;height: 240px;">
-						<a href="${ctx}/Shop/edit/${p.id}">
+						<a href="${ctx}/Product/edit/${p.id}">
 							<img src="${pageContext.request.contextPath}/products/${p.pimage}" width="170" height="170" style="display: inline-block;" class="img-rounded img-responsive">
 						</a>
-						<p><a href="${ctx}/Shop/edit/${p.id}" style='color:green'>${fn:substring(p.pname, 0, 10) }...</a></p>
+						<p><font style='color:green'>${fn:substring(p.pname, 0, 10) }...</font></p>
 						<p><font color="#FF0000">商城价：&yen;${p.price}</font></p>
 					</div>
 				</c:forEach>

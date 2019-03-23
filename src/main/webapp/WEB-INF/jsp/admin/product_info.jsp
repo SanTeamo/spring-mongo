@@ -15,6 +15,7 @@
 		</div>
 		<form action="${ctx}/Product/updateProduct" enctype="multipart/form-data" method="post">
 			<input type="hidden" value="${product.id}" name="id">
+			<input type="hidden" value="${product.id}" name="">
 			<div class="form-group">
 				<label for="pname">商品名</label>
 				<input class="form-control bitian" id="pname" value="${product.pname}" name="pname">

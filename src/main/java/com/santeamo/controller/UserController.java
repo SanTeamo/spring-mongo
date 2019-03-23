@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -27,19 +29,23 @@ public class UserController {
     }
 
     @RequestMapping("/login")
-    public String login(String username, String password, HttpSession session) {
-
-        //System.out.println("username:"+username+" , password:"+password);
+    public String login(String username, String password, HttpServletRequest request) {
 
         User user = userService.findUserByUnameandPwd(username,password);
 
-        //System.out.println(user);
-
-        if (user.getType()==1){
-            session.setAttribute("loginUser",user);
-
+        if (user!=null){
+            if (user.getType()==1){
+                request.getSession().setAttribute("loginUser",user);
+                return "redirect:/index";
+            }else {
+                request.getSession().setAttribute("msg","请前往后台页面登录！");
+                request.getSession().setAttribute("link","/Admin");
+                return "error";
+            }
+        }else {
+            request.setAttribute("msg","用户名或密码错误");
+            return "login";
         }
-        return "redirect:/index";
     }
 
     @RequestMapping("/regist")

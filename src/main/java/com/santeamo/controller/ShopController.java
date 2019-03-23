@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -24,18 +25,14 @@ public class ShopController {
     @RequestMapping(value = {"","/"})
     public String myShop(HttpSession session, Model model, @PageableDefault(value = 10)Pageable pageable){
         User user = (User) session.getAttribute("loginUser");
-        if(user.getType()==2){
 
-            Pageable pageRequest = new PageRequest(pageable.getPageNumber()==0?0:pageable.getPageNumber()-1,12);
+        Pageable pageRequest = new PageRequest(pageable.getPageNumber()==0?0:pageable.getPageNumber()-1,12);
 
-            Page<Product> page = shopService.getProductsByUserName(user.getUsername(),pageRequest);
+        Page<Product> page = shopService.getProductsByUserName(user.getUsername(),pageRequest);
 
-            model.addAttribute("page",page);
+        model.addAttribute("page",page);
 
-            return "admin/shop";
-        }else {
-            return "shop";
-        }
+        return "admin/shop";
     }
 
     @RequestMapping("/{username}")
@@ -57,15 +54,5 @@ public class ShopController {
             //return "error";
             return "shop";
         }
-    }
-
-    @RequestMapping("/edit/{id}")
-    public String product(@PathVariable String id,HttpSession session){
-
-        Product product = shopService.getProductByPid(id);
-
-        session.setAttribute("product",product);
-
-        return "admin/product_info";
     }
 }

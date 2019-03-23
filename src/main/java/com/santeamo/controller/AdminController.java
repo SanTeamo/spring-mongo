@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -21,16 +22,24 @@ public class AdminController {
     }
 
     @RequestMapping("/login")
-    public String login(String username, String password, HttpSession session) {
+    public String login(String username, String password, HttpServletRequest request) {
 
         User user = userService.findUserByUnameandPwd(username,password);
 
-        if (user.getType()!=1){
-            session.setAttribute("loginUser",user);
-            return "redirect:main";
+        if (user!=null){
+            if (user.getType()!=1){
+                request.getSession().setAttribute("loginUser",user);
+                return "redirect:main";
+            }else {
+                return "redirect:/toLogin";
+            }
+        }else {
+            request.setAttribute("msg","用户名或密码错误");
+            return "admin/login";
+
         }
 
-        return "redirect:toLogin";
+
     }
 
     @RequestMapping("/logOut")

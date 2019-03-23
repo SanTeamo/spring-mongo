@@ -49,12 +49,12 @@
 
 	<%@ include file="/WEB-INF/jsp/header.jsp"%>
 
-	<div class="container" style="width:100%;background:url('${pageContext.request.contextPath}/img/regist_bg.jpg');">
-		<div class="container-fluid">
-
-			<div class="col-md-8" style="background: #fff; padding: 10px; margin: 30px; border: 7px solid #ccc;">
-				<font>会员注册</font>USER REGISTER
-				<form class="form-horizontal" style="margin-top: 5px;"
+	<div class="container">
+		<div class="page-header">
+			<h1>会员注册</h1>
+		</div>
+		<div class="col-md-8 col-md-offset-2" >
+			<%--<form class="form-horizontal" style="margin-top: 5px;"
 					action="${pageContext.request.contextPath}/Home/regist"
 					method="post">
 					<div class="form-group">
@@ -65,7 +65,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+						<label for="password" class="col-sm-2 control-label">密码</label>
 						<div class="col-sm-6">
 							<input type="password" name="password" class="bitian form-control"
 								id="password" placeholder="请输入密码">
@@ -79,7 +79,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+						<label for="inputEmail" class="col-sm-2 control-label">Email</label>
 						<div class="col-sm-6">
 							<input type="email" name="email" class="bitian form-control"
 								id="inputEmail" placeholder="Email">
@@ -104,17 +104,27 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="date" class="col-sm-2 control-label">出生日期</label>
+						<label for="birthday" class="col-sm-2 control-label">出生日期</label>
 						<div class="col-sm-6">
 							<input type="date" class="bitian form-control" name="birthday" id="birthday">
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="date" class="col-sm-2 control-label">电话</label>
+						<label for="telephone" class="col-sm-2 control-label">电话</label>
 						<div class="col-sm-6">
 							<input type="text" class="bitian form-control" name="telephone" id="telephone">
 						</div>
+					</div>
+					<div class="form-group">
+						<label for="type" class="col-sm-2 control-label">账号分类</label>
+						<div class="col-sm-6">
+							<select class="form-control" name="type" id="type">
+								<option value="1">客户</option>
+								<option value="2">卖家</option>
+							</select>
+						</div>
+
 					</div>
 
 					<div class="form-group">
@@ -125,9 +135,49 @@
 				    height:35px;width:100px;color:white;">
 						</div>
 					</div>
-				</form>
-			</div>
-
+				</form>--%>
+			<form class="form-horizontal">
+				<div class="form-group has-success has-feedback">
+					<label class="control-label col-sm-3" for="username">用户名</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="username" aria-describedby="usernameStatus">
+						<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+						<span id="usernameStatus" class="sr-only">(success)</span>
+					</div>
+				</div>
+				<div class="form-group has-error has-feedback">
+					<label class="control-label col-sm-3" for="password">密码</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="password" aria-describedby="passwordStatus">
+						<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+						<span id="passwordStatus" class="sr-only">(success)</span>
+					</div>
+				</div>
+				<div class="form-group has-success has-feedback">
+					<label class="control-label col-sm-3" for="confirmpwd">确认密码</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="confirmpwd" aria-describedby="confirmpwdStatus">
+						<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+						<span id="confirmpwdStatus" class="sr-only">(success)</span>
+					</div>
+				</div>
+				<div class="form-group has-success has-feedback">
+					<label class="control-label col-sm-3" for="email">Email</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="email" aria-describedby="emailStatus">
+						<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+						<span id="emailStatus" class="sr-only">(success)</span>
+					</div>
+				</div>
+				<div class="form-group has-success has-feedback">
+					<label class="control-label col-sm-3" for="name">姓名</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="name" aria-describedby="nameStatus">
+						<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+						<span id="nameStatus" class="sr-only">(success)</span>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 	

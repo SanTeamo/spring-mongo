@@ -14,6 +14,9 @@
 			<%@ include file="/WEB-INF/jsp/header.jsp" %>
 				<div class="container-fluid">
 					<h1>${msg}</h1>
+					<c:if test="${not empty link}">
+						<h2><a href="${link}">前往</a></h2>
+					</c:if>
 				</div>
 			<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 		</div>

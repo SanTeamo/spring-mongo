@@ -158,25 +158,29 @@
 
 				<h2 id="section3" style="border-bottom: 1px solid palevioletred">商品评价</h2>
 				<div style="border: 1px solid darkgrey" id="comments" class="col-xs-12">
-					<%--评论ID：${product.evalId}--%>
-					<c:forEach items="${comments}" var="comment" >
-						<div class="col-xs-12" style="border: 1px solid darkgrey">
-							<div class="col-xs-3">
-								买家：${comment.username}
+					<c:if test="${empty comments}">
+						<h3>暂无评论</h3>
+					</c:if>
+					<c:if test="${not empty comments}">
+						<c:forEach items="${comments}" var="comment" >
+							<div class="col-xs-12" style="border: 1px solid darkgrey">
+								<div class="col-xs-3">
+									买家：${comment.username}
+								</div>
+								<div class="col-xs-9">
+									<div class="col-xs-12">
+										评分：${comment.descScore},${comment.serviceScore},${comment.logisticsScore}
+									</div>
+									<div class="col-xs-12">
+										评价：${comment.description}
+									</div>
+									<div class="col-xs-12">
+										<fmt:formatDate value="${comment.commentTime}" pattern="yyyy-MM-dd"/>
+									</div>
+								</div>
 							</div>
-							<div class="col-xs-9">
-								<div class="col-xs-12">
-									评分：${comment.descScore},${comment.serviceScore},${comment.logisticsScore}
-								</div>
-								<div class="col-xs-12">
-									评价：${comment.description}
-								</div>
-								<div class="col-xs-12">
-									<fmt:formatDate value="${comment.commentTime}" pattern="yyyy-MM-dd"/>
-								</div>
-							</div>
-						</div>
-					</c:forEach>
+						</c:forEach>
+					</c:if>
 				</div>
 			</div>
 			<div class="col-xs-3" id="myScrollspy" >

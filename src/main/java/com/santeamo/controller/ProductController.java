@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
@@ -63,6 +64,7 @@ public class ProductController {
         Product product = productService.getProductByPid(id);
 
         Evaluation evaluation = productService.getEvaluationByPid(product.getId());
+        System.out.println(evaluation);
 
         model.addAttribute("product",product);
         model.addAttribute("comments",evaluation.getComments());
@@ -110,7 +112,17 @@ public class ProductController {
         System.out.println(product);
         productService.saveOrUpdate(product);
 
-        return "redirect:/Home/Shop";
+        return "redirect:/Shop";
+    }
+
+    @RequestMapping("/edit/{id}")
+    public String editUI(@PathVariable String id, HttpServletRequest request){
+
+        Product product = productService.getProductByPid(id);
+
+        request.setAttribute("product",product);
+
+        return "admin/product_info";
     }
 
     @RequestMapping("/updateProduct")

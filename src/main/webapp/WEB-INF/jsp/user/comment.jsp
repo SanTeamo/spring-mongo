@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
 <html>
 
@@ -48,7 +49,7 @@
             <table class="table table-bordered table-hover table-striped table-condensed">
                 <tr>
                     <td colspan='3'>
-                        <img style="display: inline-block;" src="${pageContext.request.contextPath}/products/${product.catId}/${product.pimage}" height="60">
+                        <img style="display: inline-block;" src="${pageContext.request.contextPath}/products/${product.pimage}" height="60">
                         <a target="_blank">${product.pname}</a>
                     </td>
                 </tr>
