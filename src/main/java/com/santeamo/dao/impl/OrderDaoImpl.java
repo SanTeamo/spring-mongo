@@ -54,4 +54,11 @@ public class OrderDaoImpl extends MongoDBBaseDao implements OrderDao {
     public Order findOrderByQuery(Query query) {
         return mongoTemplate.findOne(query,Order.class);
     }
+
+    @Override
+    public void changeCommentStatus(String oid, String pid) {
+        Update update = Update.update("productWrappers.$.commented", true);
+        Query query = new Query(Criteria.where("id").is(oid).and("productWrappers.pid").is(pid));
+        mongoTemplate.updateFirst(query, update, Order.class);
+    }
 }

@@ -18,4 +18,10 @@ public interface ProductService extends BaseService {
     Evaluation getEvaluationByPid(String pid);
 
     Page<Product> getProductsByCatId(Integer catId, Pageable pageable);
+
+    Page<Product> queryWithPage(Integer catId, Pageable pageRequest);
+
+    Page<Product> search(String keyword, Pageable pageable);
+
+    List<Product> getHots();
 }

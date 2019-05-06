@@ -1,5 +1,7 @@
 package com.santeamo.service;
 
+import com.santeamo.model.Product;
+
 import java.util.List;
 
 public interface BaseService {

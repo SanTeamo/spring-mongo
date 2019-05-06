@@ -42,6 +42,8 @@
 
     <form id="comment" method="post" action="${pageContext.request.contextPath}/Evaluation/writeComment">
         <input type="hidden" name="pid" value="${product.id}">
+        <input type="hidden" name="comments[0].username" value="${loginUser.username}">
+        <input type="hidden" name="oid" value="${oid}">
         <div class="page-header">
             <h1>评价商品 <%--<small>全部订单</small>--%></h1>
         </div>

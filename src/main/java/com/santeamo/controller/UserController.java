@@ -34,13 +34,11 @@ public class UserController {
         User user = userService.findUserByUnameandPwd(username,password);
 
         if (user!=null){
+            request.getSession().setAttribute("loginUser",user);
             if (user.getType()==1){
-                request.getSession().setAttribute("loginUser",user);
                 return "redirect:/index";
             }else {
-                request.getSession().setAttribute("msg","请前往后台页面登录！");
-                request.getSession().setAttribute("link","/Admin");
-                return "error";
+                return "redirect:/Admin/main";
             }
         }else {
             request.setAttribute("msg","用户名或密码错误");

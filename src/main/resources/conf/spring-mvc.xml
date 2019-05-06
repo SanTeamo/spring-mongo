@@ -102,6 +102,7 @@
 			<mvc:exclude-mapping path="/Home/regist"/>
 			<mvc:exclude-mapping path="/Home/checkUsername"/>
 			<mvc:exclude-mapping path="/Admin/**"/>
+			<mvc:exclude-mapping path="/Search/**"/>
 			<bean class="com.santeamo.interceptor.LoginInterception"/>
 		</mvc:interceptor>
 		<mvc:interceptor>
@@ -110,6 +111,7 @@
 			<mvc:exclude-mapping path="/Admin"/>
 			<mvc:exclude-mapping path="/Admin/toLogin"/>
 			<mvc:exclude-mapping path="/Admin/login"/>
+			<mvc:exclude-mapping path="/Search/**"/>
 			<bean class="com.santeamo.interceptor.AdminInterception"/>
 		</mvc:interceptor>
 	</mvc:interceptors>

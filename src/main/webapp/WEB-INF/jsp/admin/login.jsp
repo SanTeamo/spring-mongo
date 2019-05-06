@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>会员登录</title>
+<title>后台登录</title>
 	<style>
 		/*body {
 			padding-top: 40px;
@@ -58,6 +58,7 @@
 				<label for="inputPassword" class="sr-only">Password</label>
 				<input type="password" name="password" id="inputPassword" class="form-control" placeholder="请输入密码" required="">
 				<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+				<a class="btn btn-lg btn-primary btn-block" href="/">前台</a>
 			</form>
 	</div>
 </body>

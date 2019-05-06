@@ -64,7 +64,7 @@ public class ProductController {
         Product product = productService.getProductByPid(id);
 
         Evaluation evaluation = productService.getEvaluationByPid(product.getId());
-        System.out.println(evaluation);
+        //System.out.println(evaluation);
 
         model.addAttribute("product",product);
         model.addAttribute("comments",evaluation.getComments());
@@ -77,6 +77,7 @@ public class ProductController {
 
         User user = (User) session.getAttribute("loginUser");
         product.setOwnerUserName(user.getUsername());
+        product.setSales(0);
         String pathRoot = session.getServletContext().getRealPath("");
         String path="";
         if(!pimagefile.isEmpty()){
@@ -127,11 +128,14 @@ public class ProductController {
 
     @RequestMapping("/updateProduct")
     public String updateProduct(Product product, MultipartFile pimagefile, MultipartFile pdescImagefile, HttpSession session){
+        //System.out.println("postProduct ==== "+product);
         String pathRoot = session.getServletContext().getRealPath("");
         String path="";
         Product preProduct = productService.getProductByPid(product.getId());
+        //System.out.println("preProduct ==== "+preProduct);
         product.setPimage(preProduct.getPimage());
-        product.setPimage(preProduct.getPdescImage());
+        product.setPdescImage(preProduct.getPdescImage());
+        product.setSales(preProduct.getSales());
         if(!pimagefile.isEmpty()){
             //图片新名字
             String newName = UUID.randomUUID().toString().replaceAll("-","");
@@ -145,6 +149,7 @@ public class ProductController {
                 product.setPimage(newName+suffix);
                 File file = new File(pathRoot+"/products/"+preProduct.getPimage());
                 if (file.exists()){
+                    System.out.println("delet ====> "+file.getAbsolutePath());
                     file.delete();
                 }
             } catch (IOException e) {
@@ -164,15 +169,20 @@ public class ProductController {
                 product.setPdescImage(newName+suffix);
                 File file = new File(pathRoot+"/products/"+preProduct.getPdescImage());
                 if (file.exists()){
-                    System.out.println(file.getAbsolutePath());
+                    System.out.println("delet ====> "+file.getAbsolutePath());
                     file.delete();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        System.out.println(product);
+        //System.out.println(product);
+        //System.out.println("saveProduct ==== "+product);
         productService.saveOrUpdate(product);
+
+        if (((User)session.getAttribute("loginUser")).getType()==0){
+            return "redirect:/Admin/productlist";
+        }
 
         return "redirect:/Shop";
     }

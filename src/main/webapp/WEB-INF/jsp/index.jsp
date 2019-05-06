@@ -59,48 +59,6 @@
 				</div>
 			</div>
 			<!--
-            	描述：商品显示
-            -->
-			<div class="container-fluid" >
-				<div class="col-md-12 row" style="border: 2px">
-					<h4>新鲜水果</h4>
-				</div>
-				<!--左边大图部分-->
-				<div class="col-md-2 hidden-sm hidden-xs">
-					<img src="${pageContext.request.contextPath}/products/index/middle01.jpg" width="100%" height="100%" class="img-thumbnail"/>
-				</div>
-				<!--
-					右边商品项部分
-				-->
-				<div class="col-md-10">
-					<%--<div class="col-md-6 hidden-sm hidden-xs" style="height: 240px;">
-						<a href="#">
-							<img src="${pageContext.request.contextPath}/products/index/middle01.jpg" width="100%" height="100%">
-						</a>
-					</div>--%>
-				
-					<%--<c:forEach items="${news}" var="p">
-						<div class="col-md-2 col-sm-4 col-xs-6" style="text-align: center;height: 240px;">
-							<a href="${pageContext.request.contextPath}/ProductServlet?method=findProductByPid&pid=${p.pid}">
-								<img src="${pageContext.request.contextPath}/${p.pimage}" width="130" height="130" style="display: inline-block;">
-							</a>
-							<p><a href="${pageContext.request.contextPath}/ProductServlet?method=findProductByPid&pid=${p.pid}" style='color:#666'>${p.pname}</a></p>
-							<p><font color="#E4393C" style="font-size:16px">&yen;${p.shop_price}</font></p>
-						</div>
-					</c:forEach>--%>
-						<c:forEach  begin="1" end="10">
-							<div class="col-md-2 col-sm-4 col-xs-6" style="text-align: center;height: 240px;">
-								<a href="${ctx}/Product/catId/1">
-									<img src="${ctx}/products/testPimage.jpg" width="130" height="130" style="display: inline-block;">
-								</a>
-								<p><a href="${ctx}/Product/catId/1" style='color:#666'>新鲜水果</a></p>
-								<p><font color="#E4393C" style="font-size:16px">&yen;3.99</font></p>
-							</div>
-						</c:forEach>
-					
-				</div>
-			</div>
-			<!--
             	描述：广告部分
             -->
             <%--<div class="container-fluid">

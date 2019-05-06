@@ -12,36 +12,23 @@
 			margin-top: 20px;
 			margin: 0 auto;
 		}
-		
+
 		.carousel-inner .item img {
 			width: 100%;
 			height: 300px;
 		}
-		
+
 		.container .row div {
 			/* position:relative;
 			 float:left; */
-			
+
 		}
-		
+
 		font {
 			color: #3164af;
 			font-size: 18px;
 			font-weight: normal;
 			padding: 0 10px;
-		}
-		.formtips{
-			width: 200px;
-			margin:2px;
-			padding:2px;
-		}
-		.onError{
-    		background:#FFE0E9 url(${pageContext.request.contextPath}/img/reg1.gif) no-repeat 0 center;
-			padding-left:25px;
-		}
-		.onSuccess{
-    		background:#E9FBEB url(${pageContext.request.contextPath}/img/reg2.gif) no-repeat 0 center;
-			padding-left:25px;
 		}
 	</style>
 </head>
@@ -136,45 +123,70 @@
 						</div>
 					</div>
 				</form>--%>
-			<form class="form-horizontal">
-				<div class="form-group has-success has-feedback">
+			<form class="form-horizontal" action="${pageContext.request.contextPath}/Home/regist" method="post">
+				<div class="form-group has-feedback">
 					<label class="control-label col-sm-3" for="username">用户名</label>
 					<div class="col-sm-9">
-						<input type="text" class="form-control" id="username" aria-describedby="usernameStatus">
-						<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-						<span id="usernameStatus" class="sr-only">(success)</span>
+						<input type="text" class="form-control bitian" id="username" name="username">
 					</div>
 				</div>
-				<div class="form-group has-error has-feedback">
+				<div class="form-group has-feedback">
 					<label class="control-label col-sm-3" for="password">密码</label>
 					<div class="col-sm-9">
-						<input type="text" class="form-control" id="password" aria-describedby="passwordStatus">
-						<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-						<span id="passwordStatus" class="sr-only">(success)</span>
+						<input type="password" class="form-control bitian" id="password" name="password">
 					</div>
 				</div>
-				<div class="form-group has-success has-feedback">
+				<div class="form-group has-feedback">
 					<label class="control-label col-sm-3" for="confirmpwd">确认密码</label>
 					<div class="col-sm-9">
-						<input type="text" class="form-control" id="confirmpwd" aria-describedby="confirmpwdStatus">
-						<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-						<span id="confirmpwdStatus" class="sr-only">(success)</span>
+						<input type="password" class="form-control bitian" id="confirmpwd">
 					</div>
 				</div>
-				<div class="form-group has-success has-feedback">
+				<div class="form-group has-feedback">
 					<label class="control-label col-sm-3" for="email">Email</label>
 					<div class="col-sm-9">
-						<input type="text" class="form-control" id="email" aria-describedby="emailStatus">
-						<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-						<span id="emailStatus" class="sr-only">(success)</span>
+						<input type="text" class="form-control bitian" id="email" name="email">
 					</div>
 				</div>
-				<div class="form-group has-success has-feedback">
+				<div class="form-group has-feedback">
 					<label class="control-label col-sm-3" for="name">姓名</label>
 					<div class="col-sm-9">
-						<input type="text" class="form-control" id="name" aria-describedby="nameStatus">
-						<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-						<span id="nameStatus" class="sr-only">(success)</span>
+						<input type="text" class="form-control bitian" id="name" name="name">
+					</div>
+				</div>
+				<div class="form-group has-feedback">
+					<label class="control-label col-sm-3" for="sex">性别</label>
+					<div class="col-sm-9">
+						<select class="form-control bitian" id="sex" name="sex">
+							<option value="男">男</option>
+							<option value="女">女</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group has-feedback">
+					<label class="col-sm-3 control-label" for="birthday">出生日期</label>
+					<div class="col-sm-9">
+						<input type="date" class="form-control bitian" name="birthday" id="birthday">
+					</div>
+				</div>
+				<div class="form-group has-feedback">
+					<label for="telephone" class="col-sm-3 control-label">电话</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control bitian" name="telephone" id="telephone">
+					</div>
+				</div>
+				<div class="form-group has-feedback">
+					<label class="control-label col-sm-3" for="type">账号类型</label>
+					<div class="col-sm-9">
+						<select class="form-control bitian" name="type" id="type">
+							<option value="1">客户</option>
+							<option value="2">卖家</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-10 col-sm-2">
+						<input type="submit" value="注册" class="btn btn-lg btn-primary btn-block">
 					</div>
 				</div>
 			</form>

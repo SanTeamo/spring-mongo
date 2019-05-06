@@ -46,15 +46,15 @@
 								<th class="warning" colspan="5">
 
 									<c:if test="${o.status==0}">
-										<span class="label label-primary">未填写信息</span>
+										<span class="label label-default">未填写信息</span>
 										<a href="${pageContext.request.contextPath}/Home/Order/id/${o.id}" class="btn btn-success btn-xs pull-right">填写收货信息</a>
 									</c:if>
 									<c:if test="${o.status==1}">
-										<span class="label label-primary">待付款</span>
+										<span class="label label-warning">待付款</span>
 										<a href="${pageContext.request.contextPath}/Home/Order/id/${o.id}" class="btn btn-success btn-xs pull-right">付款</a>
 									</c:if>
 									<c:if test="${o.status==2}">
-										<span class="label label-primary">待发货</span>
+										<span class="label label-success">待发货</span>
 									</c:if>
 									<c:if test="${o.status==3}">
 										<span class="label label-primary">待签收</span>
@@ -65,7 +65,7 @@
 										<a href="${pageContext.request.contextPath}/Home/Order/id/${o.id}" class="btn btn-success btn-xs pull-right">评价</a>
 									</c:if>
 									<c:if test="${o.status==5}">
-										<span class="label label-primary">已评价</span>
+										<span class="label label-default">已评价</span>
 									</c:if>
 									总金额:¥<fmt:formatNumber type="number" value="${o.totalPrice}" pattern="0.00" maxFractionDigits="2"/>元
 									<a href="/Home/Order/id/${o.id}">订单编号:${o.id}</a>

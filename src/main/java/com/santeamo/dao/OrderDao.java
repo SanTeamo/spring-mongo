@@ -20,4 +20,6 @@ public interface OrderDao extends BaseDao {
     WriteResult changeStatus(String orderId, OrderStatus status);
 
     Order findOrderByQuery(Query query);
+
+    void changeCommentStatus(String oid, String pid);
 }

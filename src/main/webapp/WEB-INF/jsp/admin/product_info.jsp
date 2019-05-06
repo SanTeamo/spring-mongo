@@ -15,7 +15,7 @@
 		</div>
 		<form action="${ctx}/Product/updateProduct" enctype="multipart/form-data" method="post">
 			<input type="hidden" value="${product.id}" name="id">
-			<input type="hidden" value="${product.id}" name="">
+			<input type="hidden" value="${product.ownerUserName}" name="ownerUserName">
 			<div class="form-group">
 				<label for="pname">商品名</label>
 				<input class="form-control bitian" id="pname" value="${product.pname}" name="pname">
@@ -26,7 +26,7 @@
 			</div>
 			<div class="form-group">
 				<label for="pdesc">商品描述</label>
-				<textarea class="form-control" id="pdesc" placeholder="${product.pdesc}" name="pdesc"></textarea>
+				<textarea class="form-control" id="pdesc" name="pdesc">${product.pdesc}</textarea>
 			</div>
 			<div class="form-group">
 				<label for="catId">商品分类</label>

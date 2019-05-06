@@ -146,9 +146,9 @@
 				<h2 id="section1" style="border-bottom: 1px solid palevioletred">商品介绍</h2>
 				<div style="border: 1px solid darkgrey">
 					<h3>${product.pdesc}</h3>
-					<c:forEach var="i" begin="1" end="10">
+					<%--<c:forEach var="i" begin="1" end="10">
 						<h3>${product.pdesc}${i}</h3>
-					</c:forEach>
+					</c:forEach>--%>
 				</div>
 
 				<h2 id="section2" style="border-bottom: 1px solid palevioletred">商品详情</h2>
@@ -162,24 +162,27 @@
 						<h3>暂无评论</h3>
 					</c:if>
 					<c:if test="${not empty comments}">
-						<c:forEach items="${comments}" var="comment" >
-							<div class="col-xs-12" style="border: 1px solid darkgrey">
-								<div class="col-xs-3">
-									买家：${comment.username}
+						<div style="margin-top: 8px;">
+							<c:forEach items="${comments}" var="comment" >
+								<div class="col-xs-12" style="border: 1px solid darkgrey">
+									<div class="col-xs-3">
+										买家：${comment.username}
+									</div>
+									<div class="col-xs-9">
+										<div class="col-xs-12">
+											评分：描述相符：${comment.descScore}，卖家服务：${comment.serviceScore}，物流服务：${comment.logisticsScore}
+										</div>
+										<div class="col-xs-12">
+											评价：${comment.description}
+										</div>
+										<div class="col-xs-12">
+											日期：<fmt:formatDate value="${comment.commentTime}" pattern="yyyy-MM-dd"/>
+										</div>
+									</div>
 								</div>
-								<div class="col-xs-9">
-									<div class="col-xs-12">
-										评分：${comment.descScore},${comment.serviceScore},${comment.logisticsScore}
-									</div>
-									<div class="col-xs-12">
-										评价：${comment.description}
-									</div>
-									<div class="col-xs-12">
-										<fmt:formatDate value="${comment.commentTime}" pattern="yyyy-MM-dd"/>
-									</div>
-								</div>
-							</div>
-						</c:forEach>
+							</c:forEach>
+						</div>
+
 					</c:if>
 				</div>
 			</div>

@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!--	描述：菜单栏	-->
+<script src="${ctx}/js/search.js" type="text/javascript"></script>
 <div class="container-fluid">
-	<%--<nav class="navbar navbar-default navbar-static-top">
-	<div class="container">
-		...
-	</div>
-</nav>--%>
 	<div class="col-md-3 col-xs-12 col-md-offset-1" >
 		<img src="${pageContext.request.contextPath}/img/logo.png" height="100" />
 	</div>
@@ -18,8 +14,10 @@
         		<button class="btn btn-default" type="button">搜索</button>
       			</span>
 			</div>--%>
-			<form class="input-group" role="search">
-				<input type="text" class="form-control" placeholder="输入搜索内容">
+			<form action="${ctx}/Search" method="get" class="input-group" role="search" id="search">
+				<div class="form-group has-feedback">
+					<input type="text" class="form-control" placeholder="输入搜索内容" id="keyword" name="keyword" value="${keyword}">
+				</div>
 				<span class="input-group-btn">
         		<button class="btn btn-default" type="submit">搜索</button>
       			</span>

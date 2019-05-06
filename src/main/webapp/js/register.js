@@ -1,6 +1,4 @@
 $(function(){  //默认做一些页面初始化
-	$(".bitian").after("<span class='formtips'>*必填</span>");
-	
 	$(".bitian").blur(function(){
 		//var value = this.value;
 		var value = $(this).val();
@@ -8,12 +6,12 @@ $(function(){  //默认做一些页面初始化
 		if($(this).is("#username")){
 			var checkResult = false;
 			$(this).parent().find(".formtips").remove();
+            $(this).parent().parent().addClass("has-error");
 			if(value.length == 0){
-				$(this).parent().append("<span class='formtips onError'>用户名不能为空</span>")
+				setErrorTip($(this),"用户名不能为空");
 			}else if(value.length < 3){
-				$(this).parent().append("<span class='formtips onError'>用户名太短</span>")
+                setErrorTip($(this),"用户名太短");
 			}else{
-				//$(this).parent().append("<span class='formtips onSuccess'>用户名可以使用</span>")
 				$.ajax({
 					url:"/Home/checkUsername",
 					data:{username:value},
@@ -25,73 +23,80 @@ $(function(){  //默认做一些页面初始化
 					}
 				});
 				if (checkResult) {
-					$(this).parent().append("<span class='formtips onError'>该用户已经注册</span>");
+                    setErrorTip($(this),"该用户已经注册");
 				} else {
-					$(this).parent().append("<span class='formtips onSuccess'>用户名可以使用</span>")
+                    setSuccessTip($(this));
 				}
 			}
 		}
 		
 		if($(this).is("#password")){
 			$(this).parent().find(".formtips").remove();
+            $(this).parent().parent().addClass("has-error");
 			if(value.length == 0){
-				$(this).parent().append("<span class='formtips onError'>密码不能为空</span>")
+				setErrorTip($(this),"密码不能为空");
 			}else if(value.length < 3){
-				$(this).parent().append("<span class='formtips onError'>密码太短</span>")
+                setErrorTip($(this),"密码太短");
 			}else{
-				$(this).parent().append("<span class='formtips onSuccess'>密码可以使用</span>")
+                setSuccessTip($(this));
 			}
 		}
 		
 		if($(this).is("#confirmpwd")){
 			$(this).parent().find(".formtips").remove();
+            $(this).parent().parent().addClass("has-error");
 			if(value.length == 0){
-				$(this).parent().append("<span class='formtips onError'>密码不能为空</span>")
+                setErrorTip($(this),"请确认密码");
 			}else if(value != $("#password").val()){
-				$(this).parent().append("<span class='formtips onError'>两次输入密码不一致</span>")
+                setErrorTip($(this),"两次输入密码不一致");
 			}else{
-				$(this).parent().append("<span class='formtips onSuccess'>密码可以使用</span>")
-			}
+
+                setSuccessTip($(this));
+            }
 		}
 		
-		if($(this).is("#inputEmail")){
+		if($(this).is("#email")){
 			$(this).parent().find(".formtips").remove();
+            $(this).parent().parent().addClass("has-error");
 			if(value.length != 0){
 				var pattern = /^([A-Za-z0-9_\-\.\u4e00-\u9fa5])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,8})$/;
 				if(pattern.test(value)){
-					$(this).parent().append("<span class='formtips onSuccess'>邮箱可以使用</span>");
+					setSuccessTip($(this));
 				}else{
-					$(this).parent().append("<span class='formtips onError'>邮箱格式不正确</span>");
+					setErrorTip($(this),"邮箱格式不正确");
 				}
 			}else{
-				$(this).parent().append("<span class='formtips onError'>邮箱不能为空</span>");
+				setErrorTip($(this),"邮箱不能为空");
 			}
 		}
 		
-		if($(this).is("#usercaption")){
+		if($(this).is("#name")){
 			$(this).parent().find(".formtips").remove();
+            $(this).parent().parent().addClass("has-error");
 			if(value.length == 0){
-				$(this).parent().append("<span class='formtips onError'>姓名不能为空</span>")
+                setErrorTip($(this),"姓名不能为空");
 			}else{
-				$(this).parent().append("<span class='formtips onSuccess'>姓名可以使用</span>")
+                setSuccessTip($(this));
 			}
 		}
 		
 		if($(this).is("#birthday")){
 			$(this).parent().find(".formtips").remove();
+            $(this).parent().parent().addClass("has-error");
 			if(value.length == 0){
-				$(this).parent().append("<span class='formtips onError'>生日不能为空</span>")
+                setErrorTip($(this),"生日不能为空");
 			}else{
-				$(this).parent().append("<span class='formtips onSuccess'></span>")
+                setSuccessTip($(this));
 			}
 		}
-		
+
 		if($(this).is("#telephone")){
 			$(this).parent().find(".formtips").remove();
+            $(this).parent().parent().addClass("has-error");
 			if(value.length == 11){
-				$(this).parent().append("<span class='formtips onSuccess'></span>")
+                setSuccessTip($(this));
 			}else{
-				$(this).parent().append("<span class='formtips onError'>手机号码格式不正确</span>")
+                setErrorTip($(this),"请输入11位手机号码");
 			}
 		}
 		
@@ -107,11 +112,21 @@ $(function(){  //默认做一些页面初始化
 		$(".bitian").trigger("focus");
 		
 		//找出onError的个数
-		var length = $(".onError").length;
+		var length = $(".has-error").length;
 		if(length>0){
 			return false;
 		}else{
 			return true;
 		}
 	});
+	
+	function setSuccessTip(obj) {
+        obj.parent().parent().removeClass("has-error");
+        obj.parent().parent().addClass("has-success");
+		obj.after("<span class='glyphicon glyphicon-ok form-control-feedback formtips'></span>")
+    }
+
+    function setErrorTip(obj,msg) {
+        obj.after("<span class='glyphicon glyphicon-remove form-control-feedback formtips'></span><span class='formtips help-block'>"+msg+"</span>")
+    }
 });

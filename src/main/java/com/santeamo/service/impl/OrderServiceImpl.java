@@ -160,6 +160,9 @@ public class OrderServiceImpl extends BaseServiceImpl implements OrderService {
 
     @Override
     public Boolean signOrder(String orderId) {
+        Order order = orderDao.findById(Order.class,orderId);
+        List<ProductWrapper> productWrappers = order.getProductWrappers();
+        productDao.saleAdd(productWrappers);
         WriteResult writeResult = orderDao.changeStatus(orderId, OrderStatus.SIGNED);
         if (writeResult.getN()>0){
             return true;

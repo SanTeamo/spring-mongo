@@ -260,7 +260,7 @@
     })
     $(".comment").click(function () {
         var pid = $(this).prev().val();
-        window.location.href="/Evaluation/Comment/"+pid;
+        window.location.href="/Evaluation/Comment/oid/${order.id}/pid/"+pid;
     })
 </script>
 

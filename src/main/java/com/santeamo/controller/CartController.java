@@ -46,7 +46,7 @@ public class CartController {
     @ResponseBody
     public Boolean changeCartItemNum(String pid,Integer num,HttpSession session){
 
-        System.out.println("pid = "+pid + ", num = "+num);
+        //System.out.println("pid = "+pid + ", num = "+num);
         Cart cart = (Cart) session.getAttribute("cart");
         //session.getAttribute("loginUser");
         cartService.changeCartItemNum(pid,num,cart.getId());
