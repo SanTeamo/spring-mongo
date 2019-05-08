@@ -1,5 +1,6 @@
 package com.santeamo.controller;
 
+import com.santeamo.model.Chart;
 import com.santeamo.model.Product;
 import com.santeamo.model.User;
 import com.santeamo.service.ProductService;
@@ -12,10 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/Admin")
@@ -97,6 +100,34 @@ public class AdminController {
     public String updateuser(User user){
         userService.saveOrUpdate(user);
         return "redirect:/Admin/userlist";
+    }
+
+    @RequestMapping("chart")
+    public String chart(){
+
+        return "admin/chart";
+
+    }
+
+    @RequestMapping("getChart")
+    @ResponseBody
+    public Chart getChart(HttpServletRequest request){
+
+        User user = (User) request.getSession().getAttribute("loginUser");
+
+        Chart chart = productService.getChart(user);
+
+        String username = user.getUsername();
+
+        if (user.getType()==0){
+            chart.setName("所有");
+            chart.setTitle("商品销量统计");
+        }else {
+            chart.setName(username);
+            chart.setTitle(username+"的商品销量统计");
+        }
+
+        return chart;
     }
 
 }

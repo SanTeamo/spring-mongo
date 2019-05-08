@@ -2,11 +2,16 @@ package com.santeamo.service.impl;
 
 import com.santeamo.dao.EvaluationDao;
 import com.santeamo.dao.ProductDao;
+import com.santeamo.model.Chart;
 import com.santeamo.model.Evaluation;
 import com.santeamo.model.Product;
+import com.santeamo.model.User;
 import com.santeamo.service.ProductService;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
@@ -14,6 +19,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.group;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.match;
 
 @Service
 public class ProductServiceImpl extends BaseServiceImpl implements ProductService {
@@ -50,7 +58,33 @@ public class ProductServiceImpl extends BaseServiceImpl implements ProductServic
 
     @Override
     public List<Product> getHots() {
-        return null;
+        Query query = new Query();
+        query.with(new Sort(Sort.Direction.DESC,"sales"));
+        Page<Product> page = productDao.getProductsByQuery(query, new PageRequest(0,12));
+        return page.getContent();
+    }
+
+    @Override
+    public Chart getChart(User user) {
+
+        Query query = new Query();
+        if (user.getType()==2){
+            query.addCriteria(Criteria.where("ownerUserName").is(user.getUsername()));
+        }
+        query.with(new Sort(Sort.Direction.DESC,"sales"));
+        Page<Product> page = productDao.getProductsByQuery(query, new PageRequest(0,12));
+        Chart chart = pageToChart(page);
+        return chart;
+    }
+
+    private Chart pageToChart(Page page){
+        List<Product> list = page.getContent();
+        Chart chart = new Chart();
+        for (Product product : list){
+            chart.getCategories().add(product.getPname());
+            chart.getData().add(product.getSales());
+        }
+        return chart;
     }
 
     @Override

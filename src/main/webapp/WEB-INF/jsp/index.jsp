@@ -94,13 +94,13 @@
 							<p><font color="#E4393C" style="font-size:16px">&yen;${p.shop_price}</font></p>
 						</div>
 					</c:forEach>--%>
-					<c:forEach  begin="1" end="10">
-						<div class="col-md-2 col-sm-4 col-xs-6" style="text-align: center;height: 240px;">
-							<a href="${ctx}/Product/catId/1">
-								<img src="${ctx}/products/testPimage.jpg" width="130" height="130" style="display: inline-block;">
+					<c:forEach  items="${hots}" var="p">
+						<div  class="col-md-2 col-sm-4 col-xs-6" style="text-align: center;height: 240px;">
+							<a href="${pageContext.request.contextPath}/Product/catId/${p.catId}/id/${p.id}">
+								<img src="${pageContext.request.contextPath}/products/${p.pimage}" width="170" height="170" style="display: inline-block;" class="img-rounded img-responsive">
 							</a>
-							<p><a href="${ctx}/Product/catId/1" style='color:#666'>新鲜水果</a></p>
-							<p><font color="#E4393C" style="font-size:16px">&yen;3.99</font></p>
+							<p><a href="${pageContext.request.contextPath}/Product/catId/${p.catId}/id/${p.id}" style='color:green'>${fn:substring(p.pname, 0, 10) }...</a></p>
+							<p><font color="#FF0000">商城价：&yen;${p.price}</font></p>
 						</div>
 					</c:forEach>
 				</div>

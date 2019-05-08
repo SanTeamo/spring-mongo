@@ -165,6 +165,9 @@
 							<a href="${ctx}/Admin/productlist" target="mainFrame">商品管理</a>
 						</li>
 					</c:if>
+					<li role="presentation">
+						<a href="${ctx}/Admin/chart" target="mainFrame">商品销量</a>
+					</li>
 				</ul>
 
 			</div>

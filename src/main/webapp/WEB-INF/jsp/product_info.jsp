@@ -131,7 +131,7 @@
         </div>--%>
 	</div>
 
-	<div class="col-md-12 " id="top-nav" style="background-color: lightgrey;border: 1px solid darkgrey;z-index: 9999">
+	<%--<div class="col-md-12 " id="top-nav" style="background-color: lightgrey;border: 1px solid darkgrey;z-index: 9999">
 		<nav>
 			<ul class="list-inline nav nav-pills">
 				<li><a href="#section1">商品介绍</a></li>
@@ -139,52 +139,58 @@
 				<li><a href="#section3">商品评价</a></li>
 			</ul>
 		</nav>
-	</div>
-	<div class="col-md-12" id="productDesc">
+	</div>--%>
+	<div class="col-md-12" id="productDesc" style="margin-top: 10px">
 		<div class="col-sm-12">
 			<div class="col-sm-9">
-				<h2 id="section1" style="border-bottom: 1px solid palevioletred">商品介绍</h2>
-				<div style="border: 1px solid darkgrey">
-					<h3>${product.pdesc}</h3>
-					<%--<c:forEach var="i" begin="1" end="10">
-						<h3>${product.pdesc}${i}</h3>
-					</c:forEach>--%>
+
+				<div id="section1" class="panel panel-success">
+					<div class="panel-heading">商品介绍</div>
+					<div class="panel-body">
+						<h3>${product.pdesc}</h3>
+					</div>
 				</div>
 
-				<h2 id="section2" style="border-bottom: 1px solid palevioletred">商品详情</h2>
-				<div style="border: 1px solid darkgrey" >
-					<img class="col-xs-12" src="${pageContext.request.contextPath}/products/${product.pdescImage}">
+				<div id="section2" class="panel panel-success">
+					<div class="panel-heading">商品详情</div>
+					<div class="panel-body">
+						<img class="col-xs-12" src="${pageContext.request.contextPath}/products/${product.pdescImage}">
+					</div>
 				</div>
 
-				<h2 id="section3" style="border-bottom: 1px solid palevioletred">商品评价</h2>
-				<div style="border: 1px solid darkgrey" id="comments" class="col-xs-12">
-					<c:if test="${empty comments}">
-						<h3>暂无评论</h3>
-					</c:if>
-					<c:if test="${not empty comments}">
-						<div style="margin-top: 8px;">
-							<c:forEach items="${comments}" var="comment" >
-								<div class="col-xs-12" style="border: 1px solid darkgrey">
-									<div class="col-xs-3">
-										买家：${comment.username}
+				<div id="section3" class="panel panel-success">
+					<div class="panel-heading">商品评价</div>
+					<div class="panel-body">
+						<c:if test="${empty comments}">
+							<h3>暂无评论</h3>
+						</c:if>
+						<c:if test="${not empty comments}">
+							<div>
+								<c:forEach items="${comments}" var="comment" >
+									<div class="col-xs-12" style="border: 1px solid darkgrey;margin-bottom: 5px">
+										<div class="col-xs-3">
+											<h4>买家：${comment.username}</h4>
+										</div>
+										<div class="col-xs-9" style="border-left: 1px solid darkgrey">
+											<div class="col-xs-12" style="border-bottom: 1px solid darkgrey">
+												评分：描述相符：${comment.descScore}，卖家服务：${comment.serviceScore}，物流服务：${comment.logisticsScore}
+											</div>
+											<div class="col-xs-12" style="border-bottom: 1px solid darkgrey">
+												评价：${comment.description}
+											</div>
+											<div class="col-xs-12">
+												日期：<fmt:formatDate value="${comment.commentTime}" pattern="yyyy-MM-dd"/>
+											</div>
+										</div>
 									</div>
-									<div class="col-xs-9">
-										<div class="col-xs-12">
-											评分：描述相符：${comment.descScore}，卖家服务：${comment.serviceScore}，物流服务：${comment.logisticsScore}
-										</div>
-										<div class="col-xs-12">
-											评价：${comment.description}
-										</div>
-										<div class="col-xs-12">
-											日期：<fmt:formatDate value="${comment.commentTime}" pattern="yyyy-MM-dd"/>
-										</div>
-									</div>
-								</div>
-							</c:forEach>
-						</div>
+								</c:forEach>
+							</div>
 
-					</c:if>
+						</c:if>
+					</div>
 				</div>
+
+
 			</div>
 			<div class="col-xs-3" id="myScrollspy" >
 				<%--<nav id="myScrollspy">--%>
@@ -220,25 +226,6 @@
                 }, "json");
         }
 	});
-
-    /*$(function(){
-            var oDiv = document.getElementById("right-nav"),
-                H = 0,
-                Y = oDiv
-            while (Y) {
-                H += Y.offsetTop;
-                Y = Y.offsetParent;
-            }
-            window.onscroll = function()
-            {
-                var s = document.body.scrollTop || document.documentElement.scrollTop
-                if(s>H) {
-                    oDiv.style = "position:fixed;top:0;background-color: lightgrey"
-                } else {
-                    oDiv.style = "position:static;background-color: lightgrey"
-                }
-            }
-        });*/
     $(function(){
         var a;
         var top = document.getElementById('top-nav');
@@ -268,12 +255,5 @@
         var num = $(this).prev();
         num.val(parseInt(num.val())+1);
     });
-    /*$(document).ready(function(){
-        $("#myScrollspy").affix({
-            offset: {
-                top:200
-            }
-        });
-    });*/
 </script>
 </html>

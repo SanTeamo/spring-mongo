@@ -22,7 +22,7 @@
 	        <div class="col-md-12" >
 				<div class="col-md-12">
 					<ol class="breadcrumb">
-						<li><a href="${pageContext.request.contextPath}/index.do">首页</a></li>
+						<li><a href="${pageContext.request.contextPath}/index">首页</a></li>
 					</ol>
 				</div>
 	          <c:forEach items="${page.content}" var="p">

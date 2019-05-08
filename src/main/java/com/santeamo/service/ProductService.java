@@ -1,12 +1,12 @@
 package com.santeamo.service;
 
-import com.mongodb.gridfs.GridFSDBFile;
+import com.santeamo.model.Chart;
 import com.santeamo.model.Evaluation;
 import com.santeamo.model.Product;
+import com.santeamo.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.io.File;
 import java.util.List;
 
 public interface ProductService extends BaseService {
@@ -24,4 +24,6 @@ public interface ProductService extends BaseService {
     Page<Product> search(String keyword, Pageable pageable);
 
     List<Product> getHots();
+
+    Chart getChart(User user);
 }
