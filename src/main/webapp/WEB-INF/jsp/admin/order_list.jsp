@@ -13,9 +13,9 @@
 			<h1>客户订单 <%--<small>全部订单</small>--%></h1>
 		</div>
 		<ul class="nav nav-pills nav-justified">
-			<li id="allOrder" role="presentation"><a href="/Home/Order">全部订单</a></li>
-			<li id="notdone" role="presentation"><a href="/Home/Order/notdone">未完成订单</a></li>
-			<li id="done" role="presentation"><a href="/Home/Order/done">已完成订单</a></li>
+			<li id="allOrder" role="presentation"<c:if test="${activeTarget == 'all'}">class="active"</c:if>><a href="/Home/Order">全部订单</a></li>
+			<li id="notdone" role="presentation"<c:if test="${activeTarget == 'notdone'}">class="active"</c:if>><a href="/Home/Order/notdone">未完成订单</a></li>
+			<li id="done" role="presentation"<c:if test="${activeTarget == 'done'}">class="active"</c:if>><a href="/Home/Order/done">已完成订单</a></li>
 		</ul>
 		<c:if test="${empty page.content}">
 			<h1>没有任何东西~</h1>

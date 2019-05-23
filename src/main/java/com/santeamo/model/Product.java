@@ -11,12 +11,9 @@ import java.io.Serializable;
 
 @Document(collection = "product")
 public class Product implements Serializable {
-
     private static final long serialVersionUID = 5976714395596053072L;
-
     @Id
     private String id;
-
     private String pname;//产品名称
     private String pimage;//产品图片
     private Double price;//产品价格

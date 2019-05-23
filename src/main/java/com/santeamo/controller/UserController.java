@@ -48,8 +48,6 @@ public class UserController {
 
     @RequestMapping("/regist")
     public String register(User user){
-
-        System.out.println(user.toString());
         userService.insert(user);
         return "login";
 

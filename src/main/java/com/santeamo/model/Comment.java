@@ -7,7 +7,6 @@ import java.util.Date;
 
 public class Comment implements Serializable {
     private static final long serialVersionUID = -2658479125521407796L;
-    //private String id;
     private String description;
     private String username;
     private Integer descScore;//描述相符

@@ -45,30 +45,20 @@ public class ProductController {
     }
 
     @RequestMapping("/catId/{catId}")
-    //@ResponseBody
     public String getProductsByCatId(@PathVariable Integer catId, Model model,@PageableDefault(value = 12) Pageable pageable){
-
         Pageable pageRequest = new PageRequest(pageable.getPageNumber()==0?0:pageable.getPageNumber()-1,12);
-
         Page<Product> page = productService.getProductsByCatId(catId,pageRequest);
-
         model.addAttribute("page",page);
-        //model.addAttribute("catId",null);
         return "product_list";
-        //return page;
+
     }
 
     @RequestMapping("/catId/{catId}/id/{id}")
     public String getProductByCatIdAndPid(@PathVariable String id, Model model){
-
         Product product = productService.getProductByPid(id);
-
         Evaluation evaluation = productService.getEvaluationByPid(product.getId());
-        //System.out.println(evaluation);
-
         model.addAttribute("product",product);
         model.addAttribute("comments",evaluation.getComments());
-
         return "product_info";
     }
 

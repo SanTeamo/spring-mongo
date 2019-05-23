@@ -1,11 +1,9 @@
 package com.santeamo.service.impl;
 
 import com.santeamo.dao.EvaluationDao;
+import com.santeamo.dao.KeyWordDao;
 import com.santeamo.dao.ProductDao;
-import com.santeamo.model.Chart;
-import com.santeamo.model.Evaluation;
-import com.santeamo.model.Product;
-import com.santeamo.model.User;
+import com.santeamo.model.*;
 import com.santeamo.service.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +15,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -31,6 +30,9 @@ public class ProductServiceImpl extends BaseServiceImpl implements ProductServic
 
     @Resource
     private EvaluationDao evaluationDao;
+
+    @Resource
+    private KeyWordDao keyWordDao;
 
     @Override
     public List<Product> getProducts() {
@@ -75,6 +77,28 @@ public class ProductServiceImpl extends BaseServiceImpl implements ProductServic
         Page<Product> page = productDao.getProductsByQuery(query, new PageRequest(0,12));
         Chart chart = pageToChart(page);
         return chart;
+    }
+
+    @Override
+    public Page<Product> sameProduct(String pname,String pid,Integer catId,Pageable pageable) {
+        //Pattern pattern=Pattern.compile("^.*"+pname+".*$", Pattern.CASE_INSENSITIVE);
+        List<KeyWord> keyWords = keyWordDao.findByCatId(catId);
+
+        String search = "";
+
+        for (KeyWord keyWord:keyWords){
+            if (pname.contains(keyWord.getValue())){
+                search = keyWord.getValue();
+                break;
+            }
+        }
+
+        Criteria criteria = new Criteria();
+        criteria.and("id").ne(pid);
+        criteria.and("catId").is(catId);
+        criteria.and("pname").regex(".*"+search+".*");
+        Query query = new Query(criteria);
+        return productDao.getProductsByQuery(query,pageable);
     }
 
     private Chart pageToChart(Page page){

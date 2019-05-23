@@ -15,24 +15,16 @@ public class User implements Serializable{
 
 	private static final long serialVersionUID = 5370126753723948798L;
 	@Id
-	private String id;
-	
-	private String name;
-
-	private char sex;
-
+	private String id;//用户ID
+	private String name;//用户昵称
+	private char sex;//性别
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date birthday;
-
-	private String username;
-
-	private String password;
-
-	private String telephone;
-
-	private String email;
-
-	private Integer type;
+	private Date birthday;//生日
+	private String username;//登录账号
+	private String password;//密码
+	private String telephone;//电话
+	private String email;//邮箱
+	private Integer type;//账号类型
 
 	public String getId() {
 		return id;

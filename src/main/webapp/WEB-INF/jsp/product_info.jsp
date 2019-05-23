@@ -57,8 +57,21 @@
 
 <body data-spy="scroll" data-target="#myScrollspy" >
 <%@ include file="/WEB-INF/jsp/header.jsp" %>
-
-<div class="container">
+<div class="col-md-2">
+	<div class="panel panel-info">
+		<div class="panel-heading">同类商品</div>
+		<div class="panel-body" id="compare">
+			<%--<div  class="col-md-12" style="text-align: center;height: 240px;">
+				<a href="${pageContext.request.contextPath}/Product/catId/${product.catId}/id/${product.id}">
+					<img src="${pageContext.request.contextPath}/products/${product.pimage}" width="170" height="170" style="display: inline-block;" class="img-rounded img-responsive">
+				</a>
+				<p><a href="${pageContext.request.contextPath}/Product/catId/${product.catId}/id/${product.id}" style='color:green'>${fn:substring(product.pname, 0, 10) }...</a></p>
+				<p><font color="#FF0000">商城价：&yen;${product.price}</font></p>
+			</div>--%>
+		</div>
+	</div>
+</div>
+<div class="col-md-8">
 	<%--<div class="alert alert-warning alert-dismissible fade in" role="alert">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
 		<strong>Holy guacamole!</strong> Best check yo self, you're not looking too good.
@@ -106,11 +119,6 @@
 						<!-- 向服务端发送 商品pid-->
 						<input type="hidden" name="pid" value="${product.id}"/>
 						<div style="margin:20px 0 10px 0;;text-align: center;">
-							<%--加入到购物车 --%>
-							<!-- 取消链接的默认行为 -->
-							<%--<a href="javascript:void(0)">
-								<input class="btn btn-default addToCart" style="background: url('${pageContext.request.contextPath}/img/product.gif') no-repeat scroll 0 -600px rgba(0, 0, 0, 0);height:36px;width:127px;" value="加入购物车" type="button">
-							</a>--%>
 								<a href="javascript:void(0)" class="btn btn-default addToCart">加入购物车</a>
 						</div>
 					</form>
@@ -142,7 +150,7 @@
 	</div>--%>
 	<div class="col-md-12" id="productDesc" style="margin-top: 10px">
 		<div class="col-sm-12">
-			<div class="col-sm-9">
+			<div class="col-sm-10">
 
 				<div id="section1" class="panel panel-success">
 					<div class="panel-heading">商品介绍</div>
@@ -192,7 +200,7 @@
 
 
 			</div>
-			<div class="col-xs-3" id="myScrollspy" >
+			<div class="col-xs-2" id="myScrollspy" >
 				<%--<nav id="myScrollspy">--%>
 				<ul class="nav nav-tabs nav-stacked" data-spy="affix" data-offset-top="525" style="background-color: lightgrey">
 					<li><a href="#section1">商品介绍</a></li>
@@ -205,7 +213,7 @@
 
 
 </div>
-
+<div class="col-md-2"></div>
 <%@include file="/WEB-INF/jsp/footer.jsp" %>
 
 </body>
@@ -226,7 +234,7 @@
                 }, "json");
         }
 	});
-    $(function(){
+    /*$(function(){
         var a;
         var top = document.getElementById('top-nav');
         var pdesc = document.getElementById("productDesc");
@@ -242,7 +250,7 @@
                 pdesc.style.paddingTop = '0px';
             }
         }
-    });
+    });*/
     //点击减号
     $(".glyphicon-minus").click(function () {
         var num = $(this).next();
@@ -254,6 +262,35 @@
     $(".glyphicon-plus").click(function () {
         var num = $(this).prev();
         num.val(parseInt(num.val())+1);
+    });
+
+    $.ajax({
+        url:"/Same",
+        data:{pname:"${product.pname}",pid:"${product.id}",catId:${product.catId}},
+        type:"get",
+        dataType:"json",
+        async:false,
+        success:function (result) {
+			console.log(result)
+			var divbox = "";
+			var compare = $("#compare");
+			if (result.length>0) {
+                $.each(result,function (i,obj) {
+
+                    divbox = "<div  class='col-md-12' style='text-align: center;height: 240px;'>" +
+                        "<a href='${ctx}/Product/catId/"+obj.catId+"/id/"+obj.id+"'>" +
+                        "<img src='${ctx}/products/"+obj.pimage+"' width='170' height='170' style='display: inline-block;' class='img-rounded img-responsive'>" +
+                        "</a>" +
+                        "<p><a href='${ctx}/Product/catId/"+obj.catId+"/id/"+obj.id+"' style='color:green'>"+obj.pname+"</a></p>" +
+                        "<p><font color='#FF0000'>商城价：&yen;"+obj.price+"</font></p>" +
+                        "</div>";
+                    compare.append(divbox);
+                })
+            }else {
+                compare.append("<h3>没有任何东西</h3>");
+            }
+
+        }
     });
 </script>
 </html>

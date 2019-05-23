@@ -1,7 +1,6 @@
 package com.santeamo.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Chart {
     private ArrayList<String> categories = new ArrayList<>();

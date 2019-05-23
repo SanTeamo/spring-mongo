@@ -37,9 +37,7 @@ public class AdminController {
 
     @RequestMapping("/login")
     public String login(String username, String password, HttpServletRequest request) {
-
         User user = userService.findUserByUnameandPwd(username,password);
-
         if (user!=null){
             if (user.getType()!=1){
                 request.getSession().setAttribute("loginUser",user);
@@ -50,9 +48,7 @@ public class AdminController {
         }else {
             request.setAttribute("msg","用户名或密码错误");
             return "admin/login";
-
         }
-
 
     }
 
@@ -112,13 +108,9 @@ public class AdminController {
     @RequestMapping("getChart")
     @ResponseBody
     public Chart getChart(HttpServletRequest request){
-
         User user = (User) request.getSession().getAttribute("loginUser");
-
         Chart chart = productService.getChart(user);
-
         String username = user.getUsername();
-
         if (user.getType()==0){
             chart.setName("所有");
             chart.setTitle("商品销量统计");
@@ -126,7 +118,6 @@ public class AdminController {
             chart.setName(username);
             chart.setTitle(username+"的商品销量统计");
         }
-
         return chart;
     }
 

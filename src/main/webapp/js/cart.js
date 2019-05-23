@@ -135,17 +135,11 @@ $(function(){
 
     //提交选中的商品生成订单
     $("#submitOrder").click(function () {
-        // 创建Form
         var form = $('<form></form>');
-        // 设置属性
         form.attr('action', '/Home/Order/createOrder');
         form.attr('method', 'post');
-        // form的target属性决定form在哪个页面提交
-        // _self -> 当前页面 _blank -> 新页面
         form.attr('target', '_self');
-
         var i = 0;
-
         $(".check").each(function(){
             if($(this).prop("checked")){
                 var tr = $(this).parent().parent();
@@ -158,28 +152,16 @@ $(function(){
                 pid_input.attr('value', pid);
                 var sellerUserName_input = $('<input type="hidden" name="productWrappers['+i+'].sellerUserName" />');
                 sellerUserName_input.attr('value', sellerUserName);
-                //console.log("num = "+num+", pid = "+pid);
-                // 附加到Form
                 form.append(num_input);
                 form.append(pid_input);
                 form.append(sellerUserName_input);
                 i++;
             }
         });
-
         var totalPrice = $('<input type="hidden" name="totalPrice" />');
         totalPrice.attr('value', $(".totalPrice").text());
-        //console.log("num = "+num+", pid = "+pid);
-        // 附加到Form
         form.append(totalPrice);
-
-        //不添加到body中会显示Form submission canceled because the form is not connected
         $(document.body).append(form);
-
-        //console.log(form)
-        // 提交表单
-        //form.submit();
-        // 注意return false取消链接的默认动作
         $.post(form.attr('action'),
             form.serialize(),
             function(res) {

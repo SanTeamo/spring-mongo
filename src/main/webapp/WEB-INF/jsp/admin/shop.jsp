@@ -63,7 +63,7 @@
 						</div><!-- /.modal-content -->
 					</div><!-- /.modal-dialog -->
 				</div>
-				<button type="button" class="btn btn-default">占位</button>
+				<%--<button type="button" class="btn btn-default">占位</button>
 				<div class="btn-group" role="group">
 					<button id="btnGroupVerticalDrop1" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						下拉
@@ -73,7 +73,7 @@
 						<li><a href="#">占位</a></li>
 						<li><a href="#">占位</a></li>
 					</ul>
-				</div>
+				</div>--%>
 			</div>
 		</div>
 		<div class="col-md-11" >

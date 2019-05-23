@@ -14,12 +14,9 @@ import java.util.List;
 @Document(collection = "evaluation")
 public class Evaluation implements Serializable {
     private static final long serialVersionUID = -2375565523409189395L;
-
     @Id
     private String id;
-
     private String pid;
-
     private List<Comment> comments = new ArrayList<>();
 
     public String getPid() {

@@ -12,6 +12,7 @@ import java.util.List;
  */
 @Document(collection = "order")
 public class Order implements Serializable {
+    private static final long serialVersionUID = 7002690282716319985L;
     @Id
     private String id;
     private String userId;

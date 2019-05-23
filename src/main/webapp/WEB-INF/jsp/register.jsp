@@ -5,7 +5,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>会员注册</title>
+	<title>用户注册</title>
 	<script src="${ctx}/js/register.js" type="text/javascript"></script>
 	<style>
 		body {
@@ -38,7 +38,7 @@
 
 	<div class="container">
 		<div class="page-header">
-			<h1>会员注册</h1>
+			<h1>用户注册</h1>
 		</div>
 		<div class="col-md-8 col-md-offset-2" >
 			<%--<form class="form-horizontal" style="margin-top: 5px;"

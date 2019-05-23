@@ -26,4 +26,6 @@ public interface ProductService extends BaseService {
     List<Product> getHots();
 
     Chart getChart(User user);
+
+    Page<Product> sameProduct(String pname,String pid,Integer catId,Pageable pageable);
 }

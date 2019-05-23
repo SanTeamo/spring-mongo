@@ -15,7 +15,6 @@
 			<h1>商品销量</h1>
 		</div>
 		<div id="sales" style="margin: 0 auto"></div>
-		${chart}
 		<script language="JavaScript">
 
 			var chartData = "";

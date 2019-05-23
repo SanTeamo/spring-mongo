@@ -33,6 +33,7 @@ public class OrderController {
         Pageable pageRequest = new PageRequest(pageable.getPageNumber()==0?0:pageable.getPageNumber()-1,3);
         Page<Order> page = orderService.findOrders(user,pageRequest);
         model.addAttribute("page",page);
+        model.addAttribute("activeTarget","all");
         if (user.getType()==1){
             return "user/order_list";
         }
@@ -48,6 +49,7 @@ public class OrderController {
         Pageable pageRequest = new PageRequest(pageable.getPageNumber()==0?0:pageable.getPageNumber()-1,3);
         Page<Order> page = orderService.findnotDoneOrders(user,pageRequest);
         model.addAttribute("page",page);
+        model.addAttribute("activeTarget","notdone");
         if (user.getType()==1){
             return "user/order_list";
         }
@@ -63,6 +65,7 @@ public class OrderController {
         Pageable pageRequest = new PageRequest(pageable.getPageNumber()==0?0:pageable.getPageNumber()-1,3);
         Page<Order> page = orderService.findDoneOrders(user,pageRequest);
         model.addAttribute("page",page);
+        model.addAttribute("activeTarget","done");
         if (user.getType()==1){
             return "user/order_list";
         }
@@ -95,11 +98,7 @@ public class OrderController {
         order.setUserId(user.getId());
         order.setStatus(OrderStatus.NOTCONFIRM.getStatus());
         order.setOrderTime(new Date());
-        //System.out.println(order);
-
         return orderService.createOrder(order,cart.getId());
-
-        //return "redirect:/Home/Order";
     }
 
     @RequestMapping(value = {"/confirmOrder"},method = RequestMethod.POST)
