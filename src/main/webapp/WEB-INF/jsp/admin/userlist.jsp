@@ -65,6 +65,7 @@
                             </td>
                             <td>
                                 <button type="button" class="btn btn-primary edit">编辑</button>
+                                <button type="button" class="btn btn-warning delete">删除</button>
                             </td>
                         </tr>
                     </c:forEach>
@@ -189,6 +190,30 @@
             backdrop:"static"
 
         });*/
-    })
+    });
+
+    $(".delete").click(function(){
+
+        var uid=$(this).parent().parent().find(".uid").val();
+
+        if(confirm("确认删除?")){
+            //alert(uid);
+            $.ajax({
+                url:"/Admin/deleteuser",
+                data:{uid:uid},
+                type:"post",
+                dataType:"json",
+                async:false,
+                success:function (result) {
+                    if (result) {
+                        alert("删除成功！");
+                        window.location.href = "/Admin/userlist";
+                    }else {
+                        alert("删除失败，请稍后再试！");
+                    }
+                }
+            });
+        }
+    });
 </script>
 </html>

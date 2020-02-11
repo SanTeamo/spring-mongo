@@ -32,13 +32,13 @@ public class UserController {
     public String login(String username, String password, HttpServletRequest request) {
 
         User user = userService.findUserByUnameandPwd(username,password);
-
+        //根据用户名和密码查询用户
         if (user!=null){
-            request.getSession().setAttribute("loginUser",user);
+            request.getSession().setAttribute("loginUser",user);//存入session
             if (user.getType()==1){
-                return "redirect:/index";
+                return "redirect:/index";//是用户返回首页
             }else {
-                return "redirect:/Admin/main";
+                return "redirect:/Admin/main";//是管理员或卖家返回后台
             }
         }else {
             request.setAttribute("msg","用户名或密码错误");
@@ -48,8 +48,8 @@ public class UserController {
 
     @RequestMapping("/regist")
     public String register(User user){
-        userService.insert(user);
-        return "login";
+        userService.insert(user);//插入用户数据
+        return "login";//返回登录页面
 
     }
 

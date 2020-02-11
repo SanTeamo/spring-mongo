@@ -13,6 +13,7 @@ import com.santeamo.myenum.UserType;
 import com.santeamo.service.OrderService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
@@ -36,26 +37,27 @@ public class OrderServiceImpl extends BaseServiceImpl implements OrderService {
     public Page<Order> findOrders(User user, Pageable pageable) {
         if (user.getType() == UserType.USER.getType()){
             Query query = new Query(Criteria.where("userId").is(user.getId()));
+            query.with(new Sort(Sort.Direction.DESC,"orderTime"));
             return orderDao.findOrdersByQuery(query,pageable);
         }
         if (user.getType()  == UserType.SELLER.getType()){
             Query query = new Query(Criteria.where("sellerUserName").is(user.getUsername()));
+            query.with(new Sort(Sort.Direction.DESC,"orderTime"));
             return orderDao.findOrdersByQuery(query,pageable);
         }
         return null;
     }
 
-    /*
-    查询未完成订单
-     */
     @Override
     public Page<Order> findnotDoneOrders(User user, Pageable pageable) {
         if (user.getType() == UserType.USER.getType()){
             Query query = new Query(Criteria.where("userId").is(user.getId()).and("status").lt(OrderStatus.SIGNED.getStatus()));
+            query.with(new Sort(Sort.Direction.DESC,"orderTime"));
             return orderDao.findOrdersByQuery(query,pageable);
         }
         if (user.getType() == UserType.SELLER.getType()){
             Query query = new Query(Criteria.where("sellerUserName").is(user.getUsername()).and("status").lt(OrderStatus.SIGNED.getStatus()));
+            query.with(new Sort(Sort.Direction.DESC,"orderTime"));
             return orderDao.findOrdersByQuery(query,pageable);
         }
         return null;
@@ -68,10 +70,12 @@ public class OrderServiceImpl extends BaseServiceImpl implements OrderService {
     public Page<Order> findDoneOrders(User user, Pageable pageable) {
         if (user.getType() == UserType.USER.getType()){
             Query query = new Query(Criteria.where("userId").is(user.getId()).and("status").gte(OrderStatus.SIGNED.getStatus()));
+            query.with(new Sort(Sort.Direction.DESC,"orderTime"));
             return orderDao.findOrdersByQuery(query,pageable);
         }
         if (user.getType() == UserType.SELLER.getType()){
             Query query = new Query(Criteria.where("sellerUserName").is(user.getUsername()).and("status").gte(OrderStatus.SIGNED.getStatus()));
+            query.with(new Sort(Sort.Direction.DESC,"orderTime"));
             return orderDao.findOrdersByQuery(query,pageable);
         }
         return null;

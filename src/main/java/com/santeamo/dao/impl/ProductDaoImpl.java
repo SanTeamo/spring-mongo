@@ -48,4 +48,11 @@ public class ProductDaoImpl extends MongoDBBaseDao implements ProductDao {
         }
     }
 
+    @Override
+    public int deleteById(String pid) {
+        System.out.println(pid);
+        Query query = new Query(Criteria.where("id").is(pid));
+        return mongoTemplate.remove(query,Product.class).getN();
+    }
+
 }

@@ -32,18 +32,18 @@
 
             $(document).ready(function() {
                 var chart = {
-                    type: 'column'
+                    type: 'column'//设置图标类型
                 };
                 var title = {
-                    text: chartData.title
+                    text: chartData.title//设置标题
                 };
                 var xAxis = {
-                    categories: chartData.categories
+                    categories: chartData.categories//设置横坐标
                 };
                 var yAxis ={
                     min: 0,
                     title: {
-                        text: '销量（单位：个）'
+                        text: '销量（单位：个）'//设置纵坐标单位
                     }
                 };
                 var legend = {
@@ -80,21 +80,21 @@
                     enabled: false
                 };
                 var series= [{
-                    name: chartData.name,
-                    data: chartData.data
+                    name: chartData.name,//设置数据名称
+                    data: chartData.data//设置数据
                 }];
 
-                var json = {};
-                json.chart = chart;
-                json.title = title;
-                json.xAxis = xAxis;
-                json.yAxis = yAxis;
-                json.legend = legend;
-                json.tooltip = tooltip;
-                json.plotOptions = plotOptions;
-                json.credits = credits;
-                json.series = series;
-                $('#sales').highcharts(json);
+                var json = {};//定义数组
+                json.chart = chart;//存入图表类型
+                json.title = title;//存入图表标题
+                json.xAxis = xAxis;//存入图表横坐标
+                json.yAxis = yAxis;//存入图表纵坐标
+                json.legend = legend;//存入图表对齐方式
+                json.tooltip = tooltip;//存入鼠标提示方式
+                json.plotOptions = plotOptions;//存入绘图参数
+                json.credits = credits;//存入版权信息
+                json.series = series;//存入图表数据
+                $('#sales').highcharts(json);//根据数据绘制图表
 
             });
 		</script>

@@ -45,10 +45,10 @@
 					<thead>
 					<tr class="warning">
 						<c:if test="${order.status==4}">
-							<th colspan="6">订单编号:${order.id}</th>
+							<th colspan="6">订单编号:${order.id}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日期：<fmt:formatDate value="${order.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></th>
 						</c:if>
 						<c:if test="${order.status!=4}">
-							<th colspan="5">订单编号:${order.id}</th>
+							<th colspan="5">订单编号:${order.id}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日期：<fmt:formatDate value="${order.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></th>
 						</c:if>
 					</tr>
 					<tr>
@@ -69,7 +69,7 @@
 								<img style="display: inline-block;" src="${pageContext.request.contextPath}/products/${item.pimage}" height="60">
 							</td>
 							<td width="30%">
-								<a target="_blank">${item.pname}</a>
+								<a href="${ctx}/Product/catId/${item.catId}/id/${item.pid}">${item.pname}</a>
 							</td>
 							<td width="20%">
 								￥${item.price}

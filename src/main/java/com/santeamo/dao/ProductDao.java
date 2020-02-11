@@ -17,4 +17,6 @@ public interface ProductDao extends BaseDao {
     Page<Product> getProductsByQuery(Query query, Pageable pageable);
 
     void saleAdd(List<ProductWrapper> productWrappers);
+
+    int deleteById(String pid);
 }

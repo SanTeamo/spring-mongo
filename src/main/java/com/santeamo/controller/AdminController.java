@@ -41,9 +41,9 @@ public class AdminController {
         if (user!=null){
             if (user.getType()!=1){
                 request.getSession().setAttribute("loginUser",user);
-                return "redirect:main";
+                return "redirect:main";//返回主页面
             }else {
-                return "redirect:/toLogin";
+                return "redirect:/Home/toLogin";//普通用户返回前台
             }
         }else {
             request.setAttribute("msg","用户名或密码错误");
@@ -81,7 +81,6 @@ public class AdminController {
     }
 
     @RequestMapping("productlist")
-    //@ResponseBody
     public String getProductsByCatId(Integer catId, Model model, @PageableDefault(value = 12) Pageable pageable){
 
         Pageable pageRequest = new PageRequest(pageable.getPageNumber()==0?0:pageable.getPageNumber()-1,12);
@@ -92,10 +91,24 @@ public class AdminController {
         return "admin/productlist";
     }
 
+    @RequestMapping("deleteProduct")
+    @ResponseBody
+    public Boolean deleteProduct(String pid){
+        Boolean result = productService.deleteById(pid);
+        return result;
+    }
+
     @RequestMapping("updateuser")
     public String updateuser(User user){
         userService.saveOrUpdate(user);
         return "redirect:/Admin/userlist";
+    }
+
+    @RequestMapping("deleteuser")
+    @ResponseBody
+    public Boolean deleteuser(String uid){
+        Boolean result = userService.deleteById(uid);
+        return result;
     }
 
     @RequestMapping("chart")
@@ -109,16 +122,16 @@ public class AdminController {
     @ResponseBody
     public Chart getChart(HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("loginUser");
-        Chart chart = productService.getChart(user);
-        String username = user.getUsername();
+        Chart chart = productService.getChart(user);//取得图标数据
+        String username = user.getUsername();//设置用户名称
         if (user.getType()==0){
-            chart.setName("所有");
-            chart.setTitle("商品销量统计");
+            chart.setName("所有");//设置用户名称
+            chart.setTitle("商品销量统计");//设置标题
         }else {
-            chart.setName(username);
-            chart.setTitle(username+"的商品销量统计");
+            chart.setName(username);//设置用户
+            chart.setTitle(username+"的商品销量统计");//设置标题
         }
-        return chart;
+        return chart;//返回json数据
     }
 
 }

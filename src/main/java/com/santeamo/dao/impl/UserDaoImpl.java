@@ -40,4 +40,11 @@ public class UserDaoImpl extends MongoDBBaseDao implements UserDao {
         return page;
     }
 
+    @Override
+    public int deleteById(String uid) {
+        System.out.println(uid);
+        Query query = new Query(Criteria.where("id").is(uid));
+        return mongoTemplate.remove(query,User.class).getN();
+    }
+
 }

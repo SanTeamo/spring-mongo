@@ -11,4 +11,6 @@ public interface UserService extends BaseService {
 	Boolean checkUsername(String username);
 
 	Page<User> queryWithPage(User user, Pageable pageRequest);
+
+    Boolean deleteById(String uid);
 }

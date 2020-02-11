@@ -15,8 +15,8 @@ import java.util.List;
 public class Evaluation implements Serializable {
     private static final long serialVersionUID = -2375565523409189395L;
     @Id
-    private String id;
-    private String pid;
+    private String id;//评价ID
+    private String pid;//产品ID
     private List<Comment> comments = new ArrayList<>();
 
     public String getPid() {

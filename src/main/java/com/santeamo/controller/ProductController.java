@@ -48,16 +48,15 @@ public class ProductController {
     public String getProductsByCatId(@PathVariable Integer catId, Model model,@PageableDefault(value = 12) Pageable pageable){
         Pageable pageRequest = new PageRequest(pageable.getPageNumber()==0?0:pageable.getPageNumber()-1,12);
         Page<Product> page = productService.getProductsByCatId(catId,pageRequest);
-        model.addAttribute("page",page);
-        return "product_list";
-
+        model.addAttribute("page",page);//分页数据存入model
+        return "product_list";//返回产品列表页面
     }
 
     @RequestMapping("/catId/{catId}/id/{id}")
     public String getProductByCatIdAndPid(@PathVariable String id, Model model){
         Product product = productService.getProductByPid(id);
         Evaluation evaluation = productService.getEvaluationByPid(product.getId());
-        model.addAttribute("product",product);
+        model.addAttribute("product",product);//数据存入model
         model.addAttribute("comments",evaluation.getComments());
         return "product_info";
     }

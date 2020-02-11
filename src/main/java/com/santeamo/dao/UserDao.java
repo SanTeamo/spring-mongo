@@ -11,4 +11,6 @@ public interface UserDao extends BaseDao{
     Boolean checkUsername(String username);
 
     Page<User> getUsersByQuery(Query query, Pageable pageable);
+
+    int deleteById(String uid);
 }

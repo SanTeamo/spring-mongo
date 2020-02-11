@@ -28,4 +28,6 @@ public interface ProductService extends BaseService {
     Chart getChart(User user);
 
     Page<Product> sameProduct(String pname,String pid,Integer catId,Pageable pageable);
+
+    Boolean deleteById(String pid);
 }

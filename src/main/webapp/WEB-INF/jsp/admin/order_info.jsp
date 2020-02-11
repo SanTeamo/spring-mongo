@@ -26,7 +26,7 @@
 				<table class="table">
 					<thead>
 					<tr class="warning">
-						<th colspan="5">订单编号:${order.id}</th>
+						<th colspan="5">订单编号:${order.id}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日期：<fmt:formatDate value="${order.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></th>
 					</tr>
 					<tr>
 						<th>图片</th>

@@ -101,6 +101,12 @@ public class ProductServiceImpl extends BaseServiceImpl implements ProductServic
         return productDao.getProductsByQuery(query,pageable);
     }
 
+    @Override
+    public Boolean deleteById(String pid) {
+        int result = productDao.deleteById(pid);
+        return result>0?true:false;
+    }
+
     private Chart pageToChart(Page page){
         List<Product> list = page.getContent();
         Chart chart = new Chart();

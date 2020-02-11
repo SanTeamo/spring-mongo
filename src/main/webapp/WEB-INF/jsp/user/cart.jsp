@@ -58,7 +58,7 @@
 										<img style="display: inline-block;" src="${pageContext.request.contextPath}/products/${item.pimage}" height="60">
 									</td>
 									<td width="20%">
-										<a target="_blank">${item.pname}</a>
+										<a href="${ctx}/Product/catId/${item.catId}/id/${item.pid}">${item.pname}</a>
 									</td>
 									<td width="15%">
 										<span>￥<span class="price">${item.price}</span></span>

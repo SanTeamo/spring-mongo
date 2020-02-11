@@ -87,11 +87,14 @@
 			<c:if test="${not empty page.content}">
 				<c:forEach items="${page.content}" var="p">
 					<div  class="col-md-2 col-sm-4 col-xs-6" style="text-align: center;height: 240px;">
+						<input type="hidden" class="pid" value="${p.id}">
 						<a href="<%--javascript:void(0)--%>${ctx}/Product/edit/${p.id}" <%--data-toggle="modal" data-target=".editModalLabel"--%>>
 							<img src="${pageContext.request.contextPath}/products/${p.pimage}" width="170" height="170" style="display: inline-block;" class="img-rounded img-responsive">
 						</a>
 						<p><font style='color:green'>${fn:substring(p.pname, 0, 10) }...</font></p>
-						<p><font color="#FF0000">商城价：&yen;${p.price}</font></p>
+						<%--<p><font color="#FF0000">商城价：&yen;${p.price}</font></p>--%>
+						<a href="${ctx}/Product/edit/${p.id}" type="button" class="btn btn-primary edit">编辑</a>
+						<button type="button" class="btn btn-warning delete">删除</button>
 
 					</div>
 				</c:forEach>
@@ -112,6 +115,30 @@
                 });
 
             },"json");
+        });
+
+        $(".delete").click(function(){
+
+            var pid=$(this).parent().find(".pid").val();
+
+            if(confirm("确认删除?")){
+                //alert(pid);
+                $.ajax({
+                    url:"/Admin/deleteProduct",
+                    data:{pid:pid},
+                    type:"post",
+                    dataType:"json",
+                    async:false,
+                    success:function (result) {
+                        if (result) {
+                            alert("删除成功！");
+                            window.location.href = "/Shop";
+                        }else {
+                            alert("删除失败，请稍后再试！");
+                        }
+                    }
+                });
+            }
         });
 	</script>
 </html>

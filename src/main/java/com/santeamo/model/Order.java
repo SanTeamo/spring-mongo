@@ -14,9 +14,9 @@ import java.util.List;
 public class Order implements Serializable {
     private static final long serialVersionUID = 7002690282716319985L;
     @Id
-    private String id;
-    private String userId;
-    private String sellerUserName;
+    private String id;//订单ID
+    private String userId;//用户ID
+    private String sellerUserName;//卖家用户名
     private List<ProductWrapper> productWrappers;
     private int status;//订单状态：0未确认；1未付款；2已付款未发货；3已发货未签收；4已确认收货；5已评价
     private Double totalPrice;

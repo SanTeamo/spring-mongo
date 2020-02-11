@@ -4,6 +4,7 @@ import com.santeamo.model.Cart;
 import com.santeamo.model.Order;
 import com.santeamo.model.User;
 import com.santeamo.myenum.OrderStatus;
+import com.santeamo.myenum.UserType;
 import com.santeamo.service.OrderService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,7 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
-
+/**
+ * @author  santeamo
+ * @version 1.0
+ */
 @Controller
 @RequestMapping("/Home/Order")
 public class OrderController {
@@ -34,10 +38,10 @@ public class OrderController {
         Page<Order> page = orderService.findOrders(user,pageRequest);
         model.addAttribute("page",page);
         model.addAttribute("activeTarget","all");
-        if (user.getType()==1){
+        if (user.getType().equals(UserType.USER.getType())){
             return "user/order_list";
         }
-        if (user.getType()==2){
+        if (user.getType().equals(UserType.SELLER.getType())){
             return "admin/order_list";
         }
         return "redirect:/index";
@@ -50,10 +54,10 @@ public class OrderController {
         Page<Order> page = orderService.findnotDoneOrders(user,pageRequest);
         model.addAttribute("page",page);
         model.addAttribute("activeTarget","notdone");
-        if (user.getType()==1){
+        if (user.getType().equals(UserType.USER.getType())){
             return "user/order_list";
         }
-        if (user.getType()==2){
+        if (user.getType().equals(UserType.SELLER.getType())){
             return "admin/order_list";
         }
         return "redirect:/index";
@@ -93,11 +97,17 @@ public class OrderController {
     @RequestMapping(value = {"/createOrder"},method = RequestMethod.POST)
     @ResponseBody
     public Boolean createOrder(Order order, HttpSession session){
+        //获取用户
         User user = (User) session.getAttribute("loginUser");
+        //获取购物车
         Cart cart = (Cart) session.getAttribute("cart");
+        //设置用户ID
         order.setUserId(user.getId());
+        //设置订单状态
         order.setStatus(OrderStatus.NOTCONFIRM.getStatus());
+        //设置订单时间
         order.setOrderTime(new Date());
+        //返回结果
         return orderService.createOrder(order,cart.getId());
     }
 

@@ -33,4 +33,10 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		return userDao.getUsersByQuery(query,pageable);
 	}
 
+	@Override
+	public Boolean deleteById(String uid) {
+		int result = userDao.deleteById(uid);
+		return result>0?true:false;
+	}
+
 }
